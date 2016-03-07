@@ -22,6 +22,7 @@
 .globl irq_empty; irq_empty: pushl $-1; jmp asm_do_irq
 
 # ！调用C编写的中断处理程序(见irq/irq_handle.c)！
+#need more code when switch(seg reg)
 .globl asm_do_irq
 .extern irq_handle
 asm_do_irq:

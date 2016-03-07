@@ -316,7 +316,7 @@ disable_interrupt(void){
 }
 
 static inline void
-save_idt(void *addr, uint32_t size){
+write_idt(void *addr, uint32_t size){
 	static volatile uint16_t data[3];
 	data[0]=size-1;
 	data[1]=(uint32_t)addr;
@@ -324,5 +324,21 @@ save_idt(void *addr, uint32_t size){
 	asm volatile("lidt (%0)" : : "r"(data));
 }
 
+
+static inline void
+write_gdt(void *addr, uint32_t size){
+	static volatile uint16_t data[3];
+	data[0]=size-1;
+	data[1]=(uint32_t)addr;
+	data[2]=((uint32_t)addr)>>16;
+	asm volatile("lgdt (%0)" : : "r"(data));
+}
+
+
+/* write TR */
+static inline void
+write_tr(uint16_t selector) {
+	asm volatile("ltr %0" : : "r"(selector));
+}
 
 #endif /* !JOS_INC_X86_H */

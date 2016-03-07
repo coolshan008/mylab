@@ -12,164 +12,223 @@ BOOT_O	Makefile	/^BOOT_O := $(BOOT_S:%.S=$(OBJ_DIR)\/%.o)$/;"	m
 BOOT_S	Makefile	/^BOOT_S := $(wildcard $(BOOT_DIR)\/*.S)$/;"	m
 CC	Makefile	/^CC      := gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS := -Wall -Werror -Wfatal-errors #开启所有警告, 视警告为错误, 第一个错误结束编译$/;"	m
-CMDBYTE	include/kernel/device/kbdreg.h	60;"	d
-CR0_AM	include/kernel/mmu.h	86;"	d
-CR0_CD	include/kernel/mmu.h	88;"	d
-CR0_EM	include/kernel/mmu.h	81;"	d
-CR0_ET	include/kernel/mmu.h	83;"	d
-CR0_MP	include/kernel/mmu.h	80;"	d
-CR0_NE	include/kernel/mmu.h	84;"	d
-CR0_NW	include/kernel/mmu.h	87;"	d
-CR0_PE	include/kernel/mmu.h	79;"	d
-CR0_PG	include/kernel/mmu.h	89;"	d
-CR0_TS	include/kernel/mmu.h	82;"	d
-CR0_WP	include/kernel/mmu.h	85;"	d
-CR4_DE	include/kernel/mmu.h	94;"	d
-CR4_MCE	include/kernel/mmu.h	92;"	d
-CR4_PCE	include/kernel/mmu.h	91;"	d
-CR4_PSE	include/kernel/mmu.h	93;"	d
-CR4_PVI	include/kernel/mmu.h	96;"	d
-CR4_TSD	include/kernel/mmu.h	95;"	d
-CR4_VME	include/kernel/mmu.h	97;"	d
+CMDBYTE	include/kbdreg.h	204;"	d
+CR0_AM	include/mmu.h	22;"	d
+CR0_CD	include/mmu.h	24;"	d
+CR0_EM	include/mmu.h	17;"	d
+CR0_ET	include/mmu.h	19;"	d
+CR0_MP	include/mmu.h	16;"	d
+CR0_NE	include/mmu.h	20;"	d
+CR0_NW	include/mmu.h	23;"	d
+CR0_PE	include/mmu.h	15;"	d
+CR0_PG	include/mmu.h	25;"	d
+CR0_TS	include/mmu.h	18;"	d
+CR0_WP	include/mmu.h	21;"	d
+CR4_DE	include/mmu.h	30;"	d
+CR4_MCE	include/mmu.h	28;"	d
+CR4_PCE	include/mmu.h	27;"	d
+CR4_PSE	include/mmu.h	29;"	d
+CR4_PVI	include/mmu.h	32;"	d
+CR4_TSD	include/mmu.h	31;"	d
+CR4_VME	include/mmu.h	33;"	d
 DD	Makefile	/^DD      := dd$/;"	m
 DEPS	Makefile	/^DEPS := $(shell find -name "*.d")$/;"	m
-DPL_KERNEL	include/kernel/mmu.h	134;"	d
-DPL_KERNEL	include/memory.h	4;"	d
-DPL_USER	include/kernel/mmu.h	135;"	d
-DPL_USER	include/memory.h	5;"	d
+DPL_KERNEL	include/mmu.h	66;"	d
+DPL_USER	include/mmu.h	67;"	d
 ELFHeader	boot/boot.h	/^struct ELFHeader {$/;"	s
-E_BAD_ENV	lib/printfmt.c	/^	E_BAD_ENV	= 2,	\/\/ Environment doesn't exist or otherwise$/;"	e	enum:__anon2	file:
-E_FAULT	lib/printfmt.c	/^	E_FAULT		= 6,	\/\/ Memory fault$/;"	e	enum:__anon2	file:
-E_INVAL	lib/printfmt.c	/^	E_INVAL		= 3,	\/\/ Invalid parameter$/;"	e	enum:__anon2	file:
-E_NO_FREE_ENV	lib/printfmt.c	/^	E_NO_FREE_ENV	= 5,	\/\/ Attempt to create a new environment beyond$/;"	e	enum:__anon2	file:
-E_NO_MEM	lib/printfmt.c	/^	E_NO_MEM	= 4,	\/\/ Request failed due to memory shortage$/;"	e	enum:__anon2	file:
-E_NO_SYS	lib/printfmt.c	/^	E_NO_SYS	= 7,	\/\/ Unimplemented system call$/;"	e	enum:__anon2	file:
-E_UNSPECIFIED	lib/printfmt.c	/^	E_UNSPECIFIED	= 1,	\/\/ Unspecified or unknown problem$/;"	e	enum:__anon2	file:
-FEC_PR	include/kernel/mmu.h	123;"	d
-FEC_U	include/kernel/mmu.h	125;"	d
-FEC_WR	include/kernel/mmu.h	124;"	d
-FL_AC	include/kernel/mmu.h	117;"	d
-FL_AF	include/kernel/mmu.h	102;"	d
-FL_CF	include/kernel/mmu.h	100;"	d
-FL_DF	include/kernel/mmu.h	107;"	d
-FL_ID	include/kernel/mmu.h	120;"	d
-FL_IF	include/kernel/mmu.h	106;"	d
-FL_IOPL_0	include/kernel/mmu.h	110;"	d
-FL_IOPL_1	include/kernel/mmu.h	111;"	d
-FL_IOPL_2	include/kernel/mmu.h	112;"	d
-FL_IOPL_3	include/kernel/mmu.h	113;"	d
-FL_IOPL_MASK	include/kernel/mmu.h	109;"	d
-FL_NT	include/kernel/mmu.h	114;"	d
-FL_OF	include/kernel/mmu.h	108;"	d
-FL_PF	include/kernel/mmu.h	101;"	d
-FL_RF	include/kernel/mmu.h	115;"	d
-FL_SF	include/kernel/mmu.h	104;"	d
-FL_TF	include/kernel/mmu.h	105;"	d
-FL_VIF	include/kernel/mmu.h	118;"	d
-FL_VIP	include/kernel/mmu.h	119;"	d
-FL_VM	include/kernel/mmu.h	116;"	d
-FL_ZF	include/kernel/mmu.h	103;"	d
-FREQ_8253	kernel/device/timer.c	7;"	d	file:
+E_BAD_ENV	lib/printfmt.c	/^	E_BAD_ENV	= 2,	\/\/ Environment doesn't exist or otherwise$/;"	e	enum:__anon3	file:
+E_FAULT	lib/printfmt.c	/^	E_FAULT		= 6,	\/\/ Memory fault$/;"	e	enum:__anon3	file:
+E_INVAL	lib/printfmt.c	/^	E_INVAL		= 3,	\/\/ Invalid parameter$/;"	e	enum:__anon3	file:
+E_NO_FREE_ENV	lib/printfmt.c	/^	E_NO_FREE_ENV	= 5,	\/\/ Attempt to create a new environment beyond$/;"	e	enum:__anon3	file:
+E_NO_MEM	lib/printfmt.c	/^	E_NO_MEM	= 4,	\/\/ Request failed due to memory shortage$/;"	e	enum:__anon3	file:
+E_NO_SYS	lib/printfmt.c	/^	E_NO_SYS	= 7,	\/\/ Unimplemented system call$/;"	e	enum:__anon3	file:
+E_UNSPECIFIED	lib/printfmt.c	/^	E_UNSPECIFIED	= 1,	\/\/ Unspecified or unknown problem$/;"	e	enum:__anon3	file:
+FL_AC	include/mmu.h	53;"	d
+FL_AF	include/mmu.h	38;"	d
+FL_CF	include/mmu.h	36;"	d
+FL_DF	include/mmu.h	43;"	d
+FL_ID	include/mmu.h	56;"	d
+FL_IF	include/mmu.h	42;"	d
+FL_IOPL_0	include/mmu.h	46;"	d
+FL_IOPL_1	include/mmu.h	47;"	d
+FL_IOPL_2	include/mmu.h	48;"	d
+FL_IOPL_3	include/mmu.h	49;"	d
+FL_IOPL_MASK	include/mmu.h	45;"	d
+FL_NT	include/mmu.h	50;"	d
+FL_OF	include/mmu.h	44;"	d
+FL_PF	include/mmu.h	37;"	d
+FL_RF	include/mmu.h	51;"	d
+FL_SF	include/mmu.h	40;"	d
+FL_TF	include/mmu.h	41;"	d
+FL_VIF	include/mmu.h	54;"	d
+FL_VIP	include/mmu.h	55;"	d
+FL_VM	include/mmu.h	52;"	d
+FL_ZF	include/mmu.h	39;"	d
+FREQ_8253	kernel/device/timer.c	8;"	d	file:
 GDB	Makefile	/^GDB     := gdb$/;"	m
 GDB_OPTIONS	Makefile	/^GDB_OPTIONS := -ex "target remote 127.0.0.1:1234"$/;"	m
 GDT_ENTRY	boot/asm.h	2;"	d
-GateDescriptor	include/kernel/mmu.h	/^struct GateDescriptor {$/;"	s
-GateDescriptor	include/memory.h	/^struct GateDescriptor {$/;"	s
-HZ	kernel/device/timer.c	8;"	d	file:
+GateDescriptor	include/mmu.h	/^struct GateDescriptor {$/;"	s
+HZ	kernel/device/timer.c	9;"	d	file:
 IMAGE	Makefile	/^IMAGE  := disk.bin$/;"	m
 INTERRUPT_GATE_32	kernel/irq/idt.c	3;"	d	file:
-IRQ_OFFSET	kernel/irq/i8259.c	5;"	d	file:
 IRQ_SLAVE	kernel/irq/i8259.c	6;"	d	file:
 JOS_INC_ASSERT_H	include/assert.h	4;"	d
-JOS_INC_MMU_H	include/kernel/mmu.h	2;"	d
+JOS_INC_MMU_H	include/mmu.h	2;"	d
 JOS_INC_STDARG_H	include/stdarg.h	3;"	d
 JOS_INC_STDIO_H	include/stdio.h	2;"	d
 JOS_INC_STRING_H	include/string.h	2;"	d
 JOS_INC_TYPES_H	include/types.h	2;"	d
 JOS_INC_X86_H	include/x86.h	2;"	d
-JOS_KBDREG_H	include/kernel/device/kbdreg.h	2;"	d
-KBCMDP	include/kernel/device/kbdreg.h	29;"	d
-KBC_AUXDISABLE	include/kernel/device/kbdreg.h	32;"	d
-KBC_AUXECHO	include/kernel/device/kbdreg.h	36;"	d
-KBC_AUXENABLE	include/kernel/device/kbdreg.h	33;"	d
-KBC_AUXTEST	include/kernel/device/kbdreg.h	34;"	d
-KBC_AUXWRITE	include/kernel/device/kbdreg.h	37;"	d
-KBC_DISABLE	include/kernel/device/kbdreg.h	66;"	d
-KBC_ECHO	include/kernel/device/kbdreg.h	71;"	d
-KBC_ENABLE	include/kernel/device/kbdreg.h	67;"	d
-KBC_KBDDISABLE	include/kernel/device/kbdreg.h	40;"	d
-KBC_KBDECHO	include/kernel/device/kbdreg.h	35;"	d
-KBC_KBDENABLE	include/kernel/device/kbdreg.h	41;"	d
-KBC_KBDTEST	include/kernel/device/kbdreg.h	39;"	d
-KBC_MODEIND	include/kernel/device/kbdreg.h	70;"	d
-KBC_PULSE0	include/kernel/device/kbdreg.h	42;"	d
-KBC_PULSE1	include/kernel/device/kbdreg.h	43;"	d
-KBC_PULSE2	include/kernel/device/kbdreg.h	44;"	d
-KBC_PULSE3	include/kernel/device/kbdreg.h	45;"	d
-KBC_RAMREAD	include/kernel/device/kbdreg.h	30;"	d
-KBC_RAMWRITE	include/kernel/device/kbdreg.h	31;"	d
-KBC_RESEND	include/kernel/device/kbdreg.h	64;"	d
-KBC_RESET	include/kernel/device/kbdreg.h	63;"	d
-KBC_SELFTEST	include/kernel/device/kbdreg.h	38;"	d
-KBC_SETDEFAULT	include/kernel/device/kbdreg.h	65;"	d
-KBC_SETTABLE	include/kernel/device/kbdreg.h	69;"	d
-KBC_TYPEMATIC	include/kernel/device/kbdreg.h	68;"	d
-KBDATAP	include/kernel/device/kbdreg.h	47;"	d
-KBOUTP	include/kernel/device/kbdreg.h	48;"	d
-KBR_ACK	include/kernel/device/kbdreg.h	76;"	d
-KBR_BREAK	include/kernel/device/kbdreg.h	79;"	d
-KBR_ECHO	include/kernel/device/kbdreg.h	81;"	d
-KBR_EXTENDED	include/kernel/device/kbdreg.h	74;"	d
-KBR_FAILURE	include/kernel/device/kbdreg.h	78;"	d
-KBR_OVERRUN	include/kernel/device/kbdreg.h	77;"	d
-KBR_RESEND	include/kernel/device/kbdreg.h	75;"	d
-KBR_RSTDONE	include/kernel/device/kbdreg.h	80;"	d
-KBSTATP	include/kernel/device/kbdreg.h	19;"	d
-KBS_DIB	include/kernel/device/kbdreg.h	20;"	d
-KBS_IBF	include/kernel/device/kbdreg.h	21;"	d
-KBS_NOSEC	include/kernel/device/kbdreg.h	24;"	d
-KBS_OCMD	include/kernel/device/kbdreg.h	23;"	d
-KBS_PERR	include/kernel/device/kbdreg.h	27;"	d
-KBS_RERR	include/kernel/device/kbdreg.h	26;"	d
-KBS_TERR	include/kernel/device/kbdreg.h	25;"	d
-KBS_WARM	include/kernel/device/kbdreg.h	22;"	d
-KC8_CPU	include/kernel/device/kbdreg.h	57;"	d
-KC8_IGNSEC	include/kernel/device/kbdreg.h	56;"	d
-KC8_KDISABLE	include/kernel/device/kbdreg.h	55;"	d
-KC8_KENABLE	include/kernel/device/kbdreg.h	59;"	d
-KC8_MDISABLE	include/kernel/device/kbdreg.h	54;"	d
-KC8_MENABLE	include/kernel/device/kbdreg.h	58;"	d
-KC8_TRANS	include/kernel/device/kbdreg.h	53;"	d
+JOS_KBDREG_H	include/kbdreg.h	2;"	d
+KBCMDP	include/kbdreg.h	173;"	d
+KBC_AUXDISABLE	include/kbdreg.h	176;"	d
+KBC_AUXECHO	include/kbdreg.h	180;"	d
+KBC_AUXENABLE	include/kbdreg.h	177;"	d
+KBC_AUXTEST	include/kbdreg.h	178;"	d
+KBC_AUXWRITE	include/kbdreg.h	181;"	d
+KBC_DISABLE	include/kbdreg.h	210;"	d
+KBC_ECHO	include/kbdreg.h	215;"	d
+KBC_ENABLE	include/kbdreg.h	211;"	d
+KBC_KBDDISABLE	include/kbdreg.h	184;"	d
+KBC_KBDECHO	include/kbdreg.h	179;"	d
+KBC_KBDENABLE	include/kbdreg.h	185;"	d
+KBC_KBDTEST	include/kbdreg.h	183;"	d
+KBC_MODEIND	include/kbdreg.h	214;"	d
+KBC_PULSE0	include/kbdreg.h	186;"	d
+KBC_PULSE1	include/kbdreg.h	187;"	d
+KBC_PULSE2	include/kbdreg.h	188;"	d
+KBC_PULSE3	include/kbdreg.h	189;"	d
+KBC_RAMREAD	include/kbdreg.h	174;"	d
+KBC_RAMWRITE	include/kbdreg.h	175;"	d
+KBC_RESEND	include/kbdreg.h	208;"	d
+KBC_RESET	include/kbdreg.h	207;"	d
+KBC_SELFTEST	include/kbdreg.h	182;"	d
+KBC_SETDEFAULT	include/kbdreg.h	209;"	d
+KBC_SETTABLE	include/kbdreg.h	213;"	d
+KBC_TYPEMATIC	include/kbdreg.h	212;"	d
+KBDATAP	include/kbdreg.h	191;"	d
+KBOUTP	include/kbdreg.h	192;"	d
+KBR_ACK	include/kbdreg.h	220;"	d
+KBR_BREAK	include/kbdreg.h	223;"	d
+KBR_ECHO	include/kbdreg.h	225;"	d
+KBR_EXTENDED	include/kbdreg.h	218;"	d
+KBR_FAILURE	include/kbdreg.h	222;"	d
+KBR_OVERRUN	include/kbdreg.h	221;"	d
+KBR_RESEND	include/kbdreg.h	219;"	d
+KBR_RSTDONE	include/kbdreg.h	224;"	d
+KBSTATP	include/kbdreg.h	163;"	d
+KBS_DIB	include/kbdreg.h	164;"	d
+KBS_IBF	include/kbdreg.h	165;"	d
+KBS_NOSEC	include/kbdreg.h	168;"	d
+KBS_OCMD	include/kbdreg.h	167;"	d
+KBS_PERR	include/kbdreg.h	171;"	d
+KBS_RERR	include/kbdreg.h	170;"	d
+KBS_TERR	include/kbdreg.h	169;"	d
+KBS_WARM	include/kbdreg.h	166;"	d
+KC8_CPU	include/kbdreg.h	201;"	d
+KC8_IGNSEC	include/kbdreg.h	200;"	d
+KC8_KDISABLE	include/kbdreg.h	199;"	d
+KC8_KENABLE	include/kbdreg.h	203;"	d
+KC8_MDISABLE	include/kbdreg.h	198;"	d
+KC8_MENABLE	include/kbdreg.h	202;"	d
+KC8_TRANS	include/kbdreg.h	197;"	d
 KERNEL	Makefile	/^KERNEL := kernel.bin$/;"	m
 KERNEL_C	Makefile	/^KERNEL_C := $(shell find $(KERNEL_DIR) -name "*.c")$/;"	m
 KERNEL_DIR	Makefile	/^KERNEL_DIR     := kernel$/;"	m
 KERNEL_O	Makefile	/^KERNEL_O := $(KERNEL_C:%.c=$(OBJ_DIR)\/%.o)$/;"	m
 KERNEL_S	Makefile	/^KERNEL_S := $(shell find $(KERNEL_DIR) -name "*.S")$/;"	m
-KEY_DEL	include/kernel/device/kbdreg.h	14;"	d
-KEY_DN	include/kernel/device/kbdreg.h	8;"	d
-KEY_END	include/kernel/device/kbdreg.h	6;"	d
-KEY_HOME	include/kernel/device/kbdreg.h	5;"	d
-KEY_INS	include/kernel/device/kbdreg.h	13;"	d
-KEY_LF	include/kernel/device/kbdreg.h	9;"	d
-KEY_PGDN	include/kernel/device/kbdreg.h	12;"	d
-KEY_PGUP	include/kernel/device/kbdreg.h	11;"	d
-KEY_RT	include/kernel/device/kbdreg.h	10;"	d
-KEY_UP	include/kernel/device/kbdreg.h	7;"	d
-K_LDCMDBYTE	include/kernel/device/kbdreg.h	51;"	d
-K_RDCMDBYTE	include/kernel/device/kbdreg.h	50;"	d
+KEY_0	include/kbdreg.h	16;"	d
+KEY_1	include/kbdreg.h	7;"	d
+KEY_2	include/kbdreg.h	8;"	d
+KEY_3	include/kbdreg.h	9;"	d
+KEY_4	include/kbdreg.h	10;"	d
+KEY_5	include/kbdreg.h	11;"	d
+KEY_6	include/kbdreg.h	12;"	d
+KEY_7	include/kbdreg.h	13;"	d
+KEY_8	include/kbdreg.h	14;"	d
+KEY_9	include/kbdreg.h	15;"	d
+KEY_A	include/kbdreg.h	35;"	d
+KEY_B	include/kbdreg.h	53;"	d
+KEY_BACKSLASH	include/kbdreg.h	48;"	d
+KEY_BACKSPACE	include/kbdreg.h	19;"	d
+KEY_BACKTICK	include/kbdreg.h	46;"	d
+KEY_BAR	include/kbdreg.h	17;"	d
+KEY_C	include/kbdreg.h	51;"	d
+KEY_CAPSLOCK	include/kbdreg.h	62;"	d
+KEY_COMMA	include/kbdreg.h	56;"	d
+KEY_D	include/kbdreg.h	37;"	d
+KEY_DEL	include/kbdreg.h	157;"	d
+KEY_DN	include/kbdreg.h	151;"	d
+KEY_DOT	include/kbdreg.h	57;"	d
+KEY_E	include/kbdreg.h	23;"	d
+KEY_END	include/kbdreg.h	149;"	d
+KEY_ENTER	include/kbdreg.h	33;"	d
+KEY_EQU	include/kbdreg.h	18;"	d
+KEY_ESC	include/kbdreg.h	6;"	d
+KEY_F	include/kbdreg.h	38;"	d
+KEY_F1	include/kbdreg.h	63;"	d
+KEY_F10	include/kbdreg.h	72;"	d
+KEY_F11	include/kbdreg.h	73;"	d
+KEY_F12	include/kbdreg.h	74;"	d
+KEY_F2	include/kbdreg.h	64;"	d
+KEY_F3	include/kbdreg.h	65;"	d
+KEY_F4	include/kbdreg.h	66;"	d
+KEY_F5	include/kbdreg.h	67;"	d
+KEY_F6	include/kbdreg.h	68;"	d
+KEY_F7	include/kbdreg.h	69;"	d
+KEY_F8	include/kbdreg.h	70;"	d
+KEY_F9	include/kbdreg.h	71;"	d
+KEY_G	include/kbdreg.h	39;"	d
+KEY_H	include/kbdreg.h	40;"	d
+KEY_HOME	include/kbdreg.h	148;"	d
+KEY_I	include/kbdreg.h	28;"	d
+KEY_INS	include/kbdreg.h	156;"	d
+KEY_J	include/kbdreg.h	41;"	d
+KEY_K	include/kbdreg.h	42;"	d
+KEY_L	include/kbdreg.h	43;"	d
+KEY_LEFTALT	include/kbdreg.h	60;"	d
+KEY_LEFTBRACE	include/kbdreg.h	31;"	d
+KEY_LEFTCTRL	include/kbdreg.h	34;"	d
+KEY_LEFTSHIFT	include/kbdreg.h	47;"	d
+KEY_LF	include/kbdreg.h	152;"	d
+KEY_M	include/kbdreg.h	55;"	d
+KEY_N	include/kbdreg.h	54;"	d
+KEY_O	include/kbdreg.h	29;"	d
+KEY_P	include/kbdreg.h	30;"	d
+KEY_PGDN	include/kbdreg.h	155;"	d
+KEY_PGUP	include/kbdreg.h	154;"	d
+KEY_Q	include/kbdreg.h	21;"	d
+KEY_QUOTE	include/kbdreg.h	45;"	d
+KEY_R	include/kbdreg.h	24;"	d
+KEY_RIGHTBRACE	include/kbdreg.h	32;"	d
+KEY_RIGHTSHIFT	include/kbdreg.h	59;"	d
+KEY_RT	include/kbdreg.h	153;"	d
+KEY_S	include/kbdreg.h	36;"	d
+KEY_SEMICOLON	include/kbdreg.h	44;"	d
+KEY_SLASH	include/kbdreg.h	58;"	d
+KEY_SPACE	include/kbdreg.h	61;"	d
+KEY_T	include/kbdreg.h	25;"	d
+KEY_TAB	include/kbdreg.h	20;"	d
+KEY_U	include/kbdreg.h	27;"	d
+KEY_UP	include/kbdreg.h	150;"	d
+KEY_V	include/kbdreg.h	52;"	d
+KEY_W	include/kbdreg.h	22;"	d
+KEY_X	include/kbdreg.h	50;"	d
+KEY_Y	include/kbdreg.h	26;"	d
+KEY_Z	include/kbdreg.h	49;"	d
+K_LDCMDBYTE	include/kbdreg.h	195;"	d
+K_RDCMDBYTE	include/kbdreg.h	194;"	d
 LD	Makefile	/^LD      := ld$/;"	m
 LD_SCRIPT	Makefile	/^LD_SCRIPT := $(shell find $(KERNEL_DIR) -name "*.ld")$/;"	m
 LIB_C	Makefile	/^LIB_C := $(wildcard $(LIB_DIR)\/*.c)$/;"	m
 LIB_DIR	Makefile	/^LIB_DIR        := lib$/;"	m
 LIB_O	Makefile	/^LIB_O := $(LIB_C:%.c=$(OBJ_DIR)\/%.o)$/;"	m
 MAX	include/types.h	49;"	d
-MAXERROR	lib/printfmt.c	/^	MAXERROR$/;"	e	enum:__anon2	file:
+MAXERROR	lib/printfmt.c	/^	MAXERROR$/;"	e	enum:__anon3	file:
 MIN	include/types.h	43;"	d
-NPDENTRIES	include/kernel/mmu.h	45;"	d
-NPTENTRIES	include/kernel/mmu.h	46;"	d
 NR_IRQ	include/x86.h	7;"	d
-NR_SEGMENTS	include/kernel/mmu.h	137;"	d
-NR_SEGMENTS	include/memory.h	7;"	d
+NR_SEGMENTS	include/mmu.h	74;"	d
 NULL	include/stdio.h	7;"	d
 NULL	include/types.h	5;"	d
 OBJCOPY	Makefile	/^OBJCOPY := objcopy$/;"	m
@@ -178,92 +237,149 @@ OBJ_DIR	Makefile	/^OBJ_DIR        := obj$/;"	m
 OBJ_KERNEL_DIR	Makefile	/^OBJ_KERNEL_DIR := $(OBJ_DIR)\/$(KERNEL_DIR)$/;"	m
 OBJ_LIB_DIR	Makefile	/^OBJ_LIB_DIR    := $(OBJ_DIR)\/$(LIB_DIR)$/;"	m
 PARTIAL_UPDATE	kernel/device/video.c	13;"	d	file:
-PDX	include/kernel/mmu.h	33;"	d
-PDXSHIFT	include/kernel/mmu.h	55;"	d
-PGADDR	include/kernel/mmu.h	42;"	d
-PGNUM	include/kernel/mmu.h	30;"	d
-PGOFF	include/kernel/mmu.h	39;"	d
-PGSHIFT	include/kernel/mmu.h	49;"	d
-PGSIZE	include/kernel/mmu.h	48;"	d
-PORT_PIC_MASTER	kernel/irq/i8259.c	3;"	d	file:
-PORT_PIC_SLAVE	kernel/irq/i8259.c	4;"	d	file:
-PTE_A	include/kernel/mmu.h	63;"	d
-PTE_ADDR	include/kernel/mmu.h	76;"	d
-PTE_AVAIL	include/kernel/mmu.h	70;"	d
-PTE_D	include/kernel/mmu.h	64;"	d
-PTE_G	include/kernel/mmu.h	66;"	d
-PTE_P	include/kernel/mmu.h	58;"	d
-PTE_PCD	include/kernel/mmu.h	62;"	d
-PTE_PS	include/kernel/mmu.h	65;"	d
-PTE_PWT	include/kernel/mmu.h	61;"	d
-PTE_SYSCALL	include/kernel/mmu.h	73;"	d
-PTE_U	include/kernel/mmu.h	60;"	d
-PTE_W	include/kernel/mmu.h	59;"	d
-PTSHIFT	include/kernel/mmu.h	52;"	d
-PTSIZE	include/kernel/mmu.h	51;"	d
-PTX	include/kernel/mmu.h	36;"	d
-PTXSHIFT	include/kernel/mmu.h	54;"	d
+PORT_PIC_MASTER	kernel/irq/i8259.c	4;"	d	file:
+PORT_PIC_SLAVE	kernel/irq/i8259.c	5;"	d	file:
 ProgramHeader	boot/boot.h	/^struct ProgramHeader {$/;"	s
-Pseudodesc	include/kernel/mmu.h	/^struct Pseudodesc {$/;"	s
+Pseudodesc	include/mmu.h	/^struct Pseudodesc {$/;"	s
 QEMU	Makefile	/^QEMU    := qemu-system-i386$/;"	m
 QEMU_DEBUG_OPTIONS	Makefile	/^QEMU_DEBUG_OPTIONS := -S #启动不执行$/;"	m
 QEMU_OPTIONS	Makefile	/^QEMU_OPTIONS := -serial stdio #以标准输入输为串口(COM1)$/;"	m
+RELEASE_0	include/kbdreg.h	87;"	d
+RELEASE_1	include/kbdreg.h	78;"	d
+RELEASE_2	include/kbdreg.h	79;"	d
+RELEASE_3	include/kbdreg.h	80;"	d
+RELEASE_4	include/kbdreg.h	81;"	d
+RELEASE_5	include/kbdreg.h	82;"	d
+RELEASE_6	include/kbdreg.h	83;"	d
+RELEASE_7	include/kbdreg.h	84;"	d
+RELEASE_8	include/kbdreg.h	85;"	d
+RELEASE_9	include/kbdreg.h	86;"	d
+RELEASE_A	include/kbdreg.h	106;"	d
+RELEASE_B	include/kbdreg.h	124;"	d
+RELEASE_BACKSPACE	include/kbdreg.h	90;"	d
+RELEASE_BACKTICK	include/kbdreg.h	117;"	d
+RELEASE_BAR	include/kbdreg.h	88;"	d
+RELEASE_BASKSLASH	include/kbdreg.h	119;"	d
+RELEASE_C	include/kbdreg.h	122;"	d
+RELEASE_CAPSLOCK	include/kbdreg.h	133;"	d
+RELEASE_COMMA	include/kbdreg.h	127;"	d
+RELEASE_D	include/kbdreg.h	108;"	d
+RELEASE_DOT	include/kbdreg.h	128;"	d
+RELEASE_E	include/kbdreg.h	94;"	d
+RELEASE_ENTER	include/kbdreg.h	104;"	d
+RELEASE_EQU	include/kbdreg.h	89;"	d
+RELEASE_ESC	include/kbdreg.h	77;"	d
+RELEASE_F	include/kbdreg.h	109;"	d
+RELEASE_F1	include/kbdreg.h	134;"	d
+RELEASE_F10	include/kbdreg.h	143;"	d
+RELEASE_F11	include/kbdreg.h	144;"	d
+RELEASE_F12	include/kbdreg.h	145;"	d
+RELEASE_F2	include/kbdreg.h	135;"	d
+RELEASE_F3	include/kbdreg.h	136;"	d
+RELEASE_F4	include/kbdreg.h	137;"	d
+RELEASE_F5	include/kbdreg.h	138;"	d
+RELEASE_F6	include/kbdreg.h	139;"	d
+RELEASE_F7	include/kbdreg.h	140;"	d
+RELEASE_F8	include/kbdreg.h	141;"	d
+RELEASE_F9	include/kbdreg.h	142;"	d
+RELEASE_G	include/kbdreg.h	110;"	d
+RELEASE_H	include/kbdreg.h	111;"	d
+RELEASE_I	include/kbdreg.h	99;"	d
+RELEASE_J	include/kbdreg.h	112;"	d
+RELEASE_K	include/kbdreg.h	113;"	d
+RELEASE_L	include/kbdreg.h	114;"	d
+RELEASE_LEFTALT	include/kbdreg.h	132;"	d
+RELEASE_LEFTBRACE	include/kbdreg.h	102;"	d
+RELEASE_LEFTCTRL	include/kbdreg.h	105;"	d
+RELEASE_LEFTSHIFT	include/kbdreg.h	118;"	d
+RELEASE_M	include/kbdreg.h	126;"	d
+RELEASE_N	include/kbdreg.h	125;"	d
+RELEASE_O	include/kbdreg.h	100;"	d
+RELEASE_P	include/kbdreg.h	101;"	d
+RELEASE_Q	include/kbdreg.h	92;"	d
+RELEASE_QUOTE	include/kbdreg.h	116;"	d
+RELEASE_R	include/kbdreg.h	95;"	d
+RELEASE_RIGHTBRACE	include/kbdreg.h	103;"	d
+RELEASE_RIGHTSHIFT	include/kbdreg.h	130;"	d
+RELEASE_S	include/kbdreg.h	107;"	d
+RELEASE_SEMICOLON	include/kbdreg.h	115;"	d
+RELEASE_SLASH	include/kbdreg.h	129;"	d
+RELEASE_SPACE	include/kbdreg.h	131;"	d
+RELEASE_T	include/kbdreg.h	96;"	d
+RELEASE_TAB	include/kbdreg.h	91;"	d
+RELEASE_U	include/kbdreg.h	98;"	d
+RELEASE_V	include/kbdreg.h	123;"	d
+RELEASE_W	include/kbdreg.h	93;"	d
+RELEASE_X	include/kbdreg.h	121;"	d
+RELEASE_Y	include/kbdreg.h	97;"	d
+RELEASE_Z	include/kbdreg.h	120;"	d
 ROUNDDOWN	include/types.h	58;"	d
 ROUNDUP	include/types.h	64;"	d
-SCR_HEIGHT	include/kernel/device/video.h	8;"	d
-SCR_SIZE	include/kernel/device/video.h	9;"	d
-SCR_WIDTH	include/kernel/device/video.h	7;"	d
+SCR_HEIGHT	include/video.h	8;"	d
+SCR_SIZE	include/video.h	9;"	d
+SCR_WIDTH	include/video.h	7;"	d
 SECTSIZE	boot/main.c	11;"	d	file:
-SEG	include/kernel/mmu.h	150;"	d
-SEG	include/kernel/mmu.h	180;"	d
-SEG16	include/kernel/mmu.h	184;"	d
+SEG	include/mmu.h	126;"	d
+SEG	include/mmu.h	94;"	d
+SEG16	include/mmu.h	130;"	d
 SEG_ASM	boot/asm.h	9;"	d
-SEG_FAULT	include/kernel/mmu.h	178;"	d
-SEG_KERNEL_CODE	include/kernel/mmu.h	138;"	d
-SEG_KERNEL_CODE	include/memory.h	8;"	d
-SEG_KERNEL_DATA	include/kernel/mmu.h	139;"	d
-SEG_KERNEL_DATA	include/memory.h	9;"	d
-SEG_NULL	include/kernel/mmu.h	147;"	d
-SEG_NULL	include/kernel/mmu.h	176;"	d
+SEG_EXECUTABLE	include/mmu.h	71;"	d
+SEG_FAULT	include/mmu.h	124;"	d
+SEG_KERNEL_CODE	include/mmu.h	75;"	d
+SEG_KERNEL_DATA	include/mmu.h	76;"	d
+SEG_NULL	include/mmu.h	122;"	d
+SEG_NULL	include/mmu.h	91;"	d
 SEG_NULLASM	boot/asm.h	5;"	d
+SEG_READABLE	include/mmu.h	70;"	d
+SEG_TSS	include/mmu.h	79;"	d
+SEG_USER_CODE	include/mmu.h	77;"	d
+SEG_USER_DATA	include/mmu.h	78;"	d
+SEG_WRITABLE	include/mmu.h	69;"	d
+SELECTOR_KERNEL	include/mmu.h	81;"	d
+SELECTOR_USER	include/mmu.h	82;"	d
 SERIAL_PORT	kernel/device/serial.c	3;"	d	file:
-SETCALLGATE	include/kernel/mmu.h	313;"	d
-SETGATE	include/kernel/mmu.h	299;"	d
+SETCALLGATE	include/mmu.h	268;"	d
+SETGATE	include/mmu.h	254;"	d
 SLOW	kernel/device/video.c	10;"	d	file:
-STA_A	include/kernel/mmu.h	197;"	d
-STA_C	include/kernel/mmu.h	194;"	d
-STA_E	include/kernel/mmu.h	193;"	d
-STA_R	include/kernel/mmu.h	196;"	d
-STA_W	include/kernel/mmu.h	195;"	d
-STA_X	include/kernel/mmu.h	192;"	d
-STS_CG16	include/kernel/mmu.h	203;"	d
-STS_CG32	include/kernel/mmu.h	209;"	d
-STS_IG16	include/kernel/mmu.h	205;"	d
-STS_IG32	include/kernel/mmu.h	210;"	d
-STS_LDT	include/kernel/mmu.h	201;"	d
-STS_T16A	include/kernel/mmu.h	200;"	d
-STS_T16B	include/kernel/mmu.h	202;"	d
-STS_T32A	include/kernel/mmu.h	207;"	d
-STS_T32B	include/kernel/mmu.h	208;"	d
-STS_TG	include/kernel/mmu.h	204;"	d
-STS_TG16	include/kernel/mmu.h	206;"	d
-STS_TG32	include/kernel/mmu.h	211;"	d
-Segdesc	include/kernel/mmu.h	/^struct Segdesc {$/;"	s
-TIMER_PORT	kernel/device/timer.c	6;"	d	file:
+STA_A	include/mmu.h	143;"	d
+STA_C	include/mmu.h	140;"	d
+STA_E	include/mmu.h	139;"	d
+STA_R	include/mmu.h	142;"	d
+STA_W	include/mmu.h	141;"	d
+STA_X	include/mmu.h	138;"	d
+STS_CG16	include/mmu.h	149;"	d
+STS_CG32	include/mmu.h	155;"	d
+STS_IG16	include/mmu.h	151;"	d
+STS_IG32	include/mmu.h	156;"	d
+STS_LDT	include/mmu.h	147;"	d
+STS_T16A	include/mmu.h	146;"	d
+STS_T16B	include/mmu.h	148;"	d
+STS_T32A	include/mmu.h	153;"	d
+STS_T32B	include/mmu.h	154;"	d
+STS_TG	include/mmu.h	150;"	d
+STS_TG16	include/mmu.h	152;"	d
+STS_TG32	include/mmu.h	157;"	d
+SegDesc	include/mmu.h	/^} SegDesc;$/;"	t	typeref:struct:SegmentDescriptor
+SegmentDescriptor	include/mmu.h	/^typedef struct SegmentDescriptor {$/;"	s
+TIMER_PORT	kernel/device/timer.c	7;"	d	file:
 TRAP_GATE_32	kernel/irq/idt.c	4;"	d	file:
-Taskstate	include/kernel/mmu.h	/^struct Taskstate {$/;"	s
-TrapFrame	include/kernel/mmu.h	/^struct TrapFrame {$/;"	s
-TrapFrame	include/memory.h	/^struct TrapFrame {$/;"	s
-VMEM_ADDR	include/kernel/device/video.h	10;"	d
-__KEYBOARD_H__	include/kernel/device/keyboard.h	2;"	d
-__TIMER_H__	include/kernel/device/timer.h	2;"	d
-__VIDEO_H__	include/kernel/device/video.h	2;"	d
-___MEMORY_H__	include/memory.h	2;"	d
+TSS	include/mmu.h	/^}TSS;$/;"	t	typeref:struct:__anon2
+Taskstate	include/mmu.h	/^struct Taskstate {$/;"	s
+TrapFrame	include/mmu.h	/^struct TrapFrame {$/;"	s
+VMEM_ADDR	include/video.h	10;"	d
+__DEVICE_H__	include/device.h	2;"	d
+__GAME_H__	include/game.h	2;"	d
+__I8259_H__	include/i8259.h	2;"	d
+__IRQ_H__	include/irq.h	2;"	d
+__VIDEO_H__	include/video.h	2;"	d
 _panic	kernel/assert.c	/^_panic(const char *file, int line, const char *fmt,...)$/;"	f
 _warn	kernel/assert.c	/^_warn(const char *file, int line, const char *fmt,...)$/;"	f
 align	boot/boot.h	/^	unsigned int align;$/;"	m	struct:ProgramHeader
 asm_do_irq	kernel/irq/do_irq.S	/^asm_do_irq:$/;"	l
 assert	include/assert.h	14;"	d
+base_15_0	include/mmu.h	/^	uint32_t base_15_0           : 16;$/;"	m	struct:SegmentDescriptor
+base_23_16	include/mmu.h	/^	uint32_t base_23_16          : 8;$/;"	m	struct:SegmentDescriptor
+base_31_24	include/mmu.h	/^	uint32_t base_31_24          : 8;$/;"	m	struct:SegmentDescriptor
 blue_screen	kernel/device/video.c	/^blue_screen(){$/;"	f
 bool	include/types.h	/^typedef _Bool bool;$/;"	t
 bootmain	boot/main.c	/^bootmain(void) {$/;"	f
@@ -273,37 +389,36 @@ cnt	lib/printfmt.c	/^	int cnt;$/;"	m	struct:sprintbuf	file:
 cpuid	include/x86.h	/^cpuid(uint32_t info, uint32_t *eaxp, uint32_t *ebxp, uint32_t *ecxp, uint32_t *edxp)$/;"	f
 disable_interrupt	include/x86.h	/^disable_interrupt(void){$/;"	f
 display_buffer	kernel/device/video.c	/^display_buffer(void) {$/;"	f
+do_keyboard	kernel/device/keyboard.c	/^void do_keyboard(int code){$/;"	f
 do_keyboard	kernel/irq/irq_handle.c	/^static void (*do_keyboard)(int);$/;"	v	file:
+do_timer	kernel/device/timer.c	/^do_timer(){$/;"	f
 do_timer	kernel/irq/irq_handle.c	/^static void (*do_timer)(void);$/;"	v	file:
-draw_pixel	include/kernel/device/video.h	/^draw_pixel(int x, int y, int color) {$/;"	f
-eax	include/kernel/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-eax	include/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-ebp	include/kernel/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-ebp	include/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+dontcare	include/mmu.h	/^	char dontcare[88];$/;"	m	struct:__anon2
+draw_pixel	include/video.h	/^draw_pixel(int x, int y, int color) {$/;"	f
+eax	include/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+ebp	include/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
 ebuf	lib/printfmt.c	/^	char *ebuf;$/;"	m	struct:sprintbuf	file:
-ebx	include/kernel/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-ebx	include/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-ecx	include/kernel/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-ecx	include/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-edi	include/kernel/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-edi	include/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-edx	include/kernel/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-edx	include/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+ebx	include/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+ecx	include/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+edi	include/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+edx	include/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
 ehsize	boot/boot.h	/^	unsigned short ehsize;$/;"	m	struct:ELFHeader
 elf	boot/boot.h	/^	unsigned char  elf[12];$/;"	m	struct:ELFHeader
 enable_interrupt	include/x86.h	/^enable_interrupt(void){$/;"	f
 entry	boot/boot.h	/^	unsigned int   entry;$/;"	m	struct:ELFHeader
 error_string	lib/printfmt.c	/^static const char * const error_string[MAXERROR] =$/;"	v	file:
-esi	include/kernel/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-esi	include/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+esi	include/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+esp0	include/mmu.h	/^	uint32_t esp0;         \/\/ Ring 0 Stack pointer and segment selector$/;"	m	struct:__anon2
 false	include/types.h	/^enum { false, true };$/;"	e	enum:__anon1
 filesz	boot/boot.h	/^	unsigned int filesz;$/;"	m	struct:ProgramHeader
 flags	boot/boot.h	/^	unsigned int   flags;$/;"	m	struct:ELFHeader
 flags	boot/boot.h	/^	unsigned int flags;$/;"	m	struct:ProgramHeader
 gdt	boot/start.S	/^gdt:$/;"	l
+gdt	kernel/memory/kvm.c	/^static SegDesc gdt[NR_SEGMENTS];$/;"	v	file:
 gdtdesc	boot/start.S	/^gdtdesc:                           # GDT描述符$/;"	l
 getint	lib/printfmt.c	/^getint(va_list *ap, int lflag)$/;"	f	file:
 getuint	lib/printfmt.c	/^getuint(va_list *ap, int lflag)$/;"	f	file:
+granularity	include/mmu.h	/^	uint32_t granularity         : 1;$/;"	m	struct:SegmentDescriptor
 hlt	include/x86.h	/^hlt(void)$/;"	f
 idt	kernel/irq/idt.c	/^struct GateDescriptor idt[NR_IRQ];$/;"	v	typeref:struct:GateDescriptor
 in_byte	boot/boot.h	/^in_byte(short port) {$/;"	f
@@ -311,6 +426,8 @@ in_long	boot/boot.h	/^in_long(short port) {$/;"	f
 inb	include/x86.h	/^inb(int port)$/;"	f
 init_idt	kernel/irq/idt.c	/^void init_idt() {$/;"	f
 init_intr	kernel/irq/i8259.c	/^init_intr(void) {$/;"	f
+init_keyboard	kernel/device/keyboard.c	/^void init_keyboard(){$/;"	f
+init_segment	kernel/memory/kvm.c	/^init_segment(void) {$/;"	f
 init_serial	kernel/device/serial.c	/^init_serial(void) {$/;"	f
 init_timer	kernel/device/timer.c	/^init_timer(void) {$/;"	f
 inl	include/x86.h	/^inl(int port)$/;"	f
@@ -324,20 +441,24 @@ int8_t	include/types.h	/^typedef __signed char int8_t;$/;"	t
 intptr_t	include/types.h	/^typedef int32_t intptr_t;$/;"	t
 invlpg	include/x86.h	/^invlpg(void *addr)$/;"	f
 inw	include/x86.h	/^inw(int port)$/;"	f
-irq	include/kernel/mmu.h	/^	int32_t irq;$/;"	m	struct:TrapFrame
-irq	include/memory.h	/^	int32_t irq;$/;"	m	struct:TrapFrame
+irq	include/mmu.h	/^	int32_t irq;$/;"	m	struct:TrapFrame
 irq_handle	kernel/irq/irq_handle.c	/^irq_handle(struct TrapFrame *tf) {$/;"	f
+kb_dreg	kernel/device/keyboard.c	/^int kb_dreg;$/;"	v
 lcr0	include/x86.h	/^lcr0(uint32_t val)$/;"	f
 lcr3	include/x86.h	/^lcr3(uint32_t val)$/;"	f
 lcr4	include/x86.h	/^lcr4(uint32_t val)$/;"	f
 lgdt	include/x86.h	/^lgdt(void *p)$/;"	f
 lidt	include/x86.h	/^lidt(void *p)$/;"	f
+limit_15_0	include/mmu.h	/^	uint32_t limit_15_0          : 16;$/;"	m	struct:SegmentDescriptor
+limit_19_16	include/mmu.h	/^	uint32_t limit_19_16         : 4;$/;"	m	struct:SegmentDescriptor
+link	include/mmu.h	/^	uint32_t link;         \/\/ old ts selector$/;"	m	struct:__anon2
 lldt	include/x86.h	/^lldt(uint16_t sel)$/;"	f
 log2	include/stdio.h	24;"	d
 ltr	include/x86.h	/^ltr(uint16_t sel)$/;"	f
 machine	boot/boot.h	/^	unsigned short machine;$/;"	m	struct:ELFHeader
 magic	boot/boot.h	/^	unsigned int   magic;$/;"	m	struct:ELFHeader
-main	kernel/game/game.c	/^int main(){$/;"	f
+main	kernel/main.c	/^int main(){$/;"	f
+main_loop	kernel/game/game.c	/^void main_loop(){$/;"	f
 memcmp	lib/string.c	/^memcmp(const void *v1, const void *v2, size_t n)$/;"	f
 memcpy	lib/string.c	/^memcpy(void *dst, const void *src, size_t n)$/;"	f
 memfind	lib/string.c	/^memfind(const void *s, int c, size_t n)$/;"	f
@@ -346,11 +467,10 @@ memset	lib/string.c	/^memset(void *v, int c, size_t n)$/;"	f
 memsz	boot/boot.h	/^	unsigned int memsz;$/;"	m	struct:ProgramHeader
 off	boot/boot.h	/^	unsigned int off;$/;"	m	struct:ProgramHeader
 off_t	include/types.h	/^typedef int32_t off_t;$/;"	t
-offset_15_0	include/kernel/mmu.h	/^	uint32_t offset_15_0      : 16;\/\/low 16bit of offset in segment$/;"	m	struct:GateDescriptor
-offset_15_0	include/memory.h	/^	uint32_t offset_15_0      : 16;$/;"	m	struct:GateDescriptor
-offset_31_16	include/kernel/mmu.h	/^	uint32_t offset_31_16     : 16;\/\/high bits of offset in segment$/;"	m	struct:GateDescriptor
-offset_31_16	include/memory.h	/^	uint32_t offset_31_16     : 16;$/;"	m	struct:GateDescriptor
+offset_15_0	include/mmu.h	/^	uint32_t offset_15_0      : 16;\/\/low 16bit of offset in segment$/;"	m	struct:GateDescriptor
+offset_31_16	include/mmu.h	/^	uint32_t offset_31_16     : 16;\/\/high bits of offset in segment$/;"	m	struct:GateDescriptor
 offsetof	include/types.h	75;"	d
+operation_size	include/mmu.h	/^	uint32_t operation_size      : 1;$/;"	m	struct:SegmentDescriptor
 out_byte	boot/boot.h	/^out_byte(short port, char data) {$/;"	f
 outb	include/x86.h	/^outb(int port, uint8_t data)$/;"	f
 outl	include/x86.h	/^outl(int port, uint32_t data)$/;"	f
@@ -358,26 +478,27 @@ outsb	include/x86.h	/^outsb(int port, const void *addr, int cnt)$/;"	f
 outsl	include/x86.h	/^outsl(int port, const void *addr, int cnt)$/;"	f
 outsw	include/x86.h	/^outsw(int port, const void *addr, int cnt)$/;"	f
 outw	include/x86.h	/^outw(int port, uint16_t data)$/;"	f
-pad0	include/kernel/mmu.h	/^	uint32_t pad0             : 8;\/\/low 5#args, 0 for interrupt\/trap gates high 3bit:reserved(should be 0 I guess)$/;"	m	struct:GateDescriptor
-pad0	include/memory.h	/^	uint32_t pad0             : 8;$/;"	m	struct:GateDescriptor
+pad0	include/mmu.h	/^	uint32_t pad0                : 1;$/;"	m	struct:SegmentDescriptor
+pad0	include/mmu.h	/^	uint32_t pad0             : 8;\/\/low 5#args, 0 for interrupt\/trap gates high 3bit:reserved(should be 0 I guess)$/;"	m	struct:GateDescriptor
 paddr	boot/boot.h	/^	unsigned int paddr;$/;"	m	struct:ProgramHeader
 panic	include/assert.h	12;"	d
 panicstr	kernel/assert.c	/^const char *panicstr;$/;"	v
-pd_base	include/kernel/mmu.h	/^	uint32_t pd_base;		\/\/ Base address$/;"	m	struct:Pseudodesc
-pd_lim	include/kernel/mmu.h	/^	uint16_t pd_lim;		\/\/ Limit$/;"	m	struct:Pseudodesc
+pd_base	include/mmu.h	/^	uint32_t pd_base;		\/\/ Base address$/;"	m	struct:Pseudodesc
+pd_lim	include/mmu.h	/^	uint16_t pd_lim;		\/\/ Limit$/;"	m	struct:Pseudodesc
 phentsize	boot/boot.h	/^	unsigned short phentsize;$/;"	m	struct:ELFHeader
 phnum	boot/boot.h	/^	unsigned short phnum;$/;"	m	struct:ELFHeader
 phoff	boot/boot.h	/^	unsigned int   phoff;$/;"	m	struct:ELFHeader
 physaddr_t	include/types.h	/^typedef uint32_t physaddr_t;$/;"	t
 ppn_t	include/types.h	/^typedef uint32_t ppn_t;$/;"	t
 prepare_buffer	kernel/device/video.c	/^prepare_buffer(void) {$/;"	f
-present	include/kernel/mmu.h	/^	uint32_t present          : 1;\/\/Present$/;"	m	struct:GateDescriptor
-present	include/memory.h	/^	uint32_t present          : 1;$/;"	m	struct:GateDescriptor
+present	include/mmu.h	/^	uint32_t present             : 1;$/;"	m	struct:SegmentDescriptor
+present	include/mmu.h	/^	uint32_t present          : 1;\/\/Present$/;"	m	struct:GateDescriptor
 printfmt	lib/printfmt.c	/^printfmt(void (*putch)(int, void*), void *putdat, const char *fmt, ...)$/;"	f
 printk	kernel/printk.c	/^int	printk(const char *fmt, ...){$/;"	f
 printnum	lib/printfmt.c	/^printnum(void (*putch)(int, void*), void *putdat,$/;"	f	file:
-privilege_level	include/kernel/mmu.h	/^	uint32_t privilege_level  : 2;\/\/descriptor(meaning new)privilege$/;"	m	struct:GateDescriptor
-privilege_level	include/memory.h	/^	uint32_t privilege_level  : 2;$/;"	m	struct:GateDescriptor
+privilege_level	include/mmu.h	/^	uint32_t privilege_level     : 2;$/;"	m	struct:SegmentDescriptor
+privilege_level	include/mmu.h	/^	uint32_t privilege_level  : 2;\/\/descriptor(meaning new)privilege$/;"	m	struct:GateDescriptor
+putch	kernel/printk.c	/^putch(int ch, void *cnt){$/;"	f	file:
 rcr0	include/x86.h	/^rcr0(void)$/;"	f
 rcr2	include/x86.h	/^rcr2(void)$/;"	f
 rcr3	include/x86.h	/^rcr3(void)$/;"	f
@@ -388,35 +509,28 @@ read_esp	include/x86.h	/^read_esp(void)$/;"	f
 read_tsc	include/x86.h	/^read_tsc(void)$/;"	f
 readsect	boot/main.c	/^readsect(void *dst, int offset) {$/;"	f
 readseg	boot/main.c	/^readseg(unsigned char *pa, int count, int offset) {$/;"	f
-sd_avl	include/kernel/mmu.h	/^	unsigned sd_avl : 1;        \/\/ Unused (available for software use)$/;"	m	struct:Segdesc
-sd_base_15_0	include/kernel/mmu.h	/^	unsigned sd_base_15_0 : 16; \/\/ Low bits of segment base address$/;"	m	struct:Segdesc
-sd_base_23_16	include/kernel/mmu.h	/^	unsigned sd_base_23_16 : 8; \/\/ Middle bits of segment base address$/;"	m	struct:Segdesc
-sd_base_31_24	include/kernel/mmu.h	/^	unsigned sd_base_31_24 : 8; \/\/ High bits of segment base address$/;"	m	struct:Segdesc
-sd_db	include/kernel/mmu.h	/^	unsigned sd_db : 1;         \/\/ 0 = 16-bit segment, 1 = 32-bit segment$/;"	m	struct:Segdesc
-sd_dpl	include/kernel/mmu.h	/^	unsigned sd_dpl : 2;        \/\/ Descriptor Privilege Level$/;"	m	struct:Segdesc
-sd_g	include/kernel/mmu.h	/^	unsigned sd_g : 1;          \/\/ Granularity: limit scaled by 4K when set$/;"	m	struct:Segdesc
-sd_lim_15_0	include/kernel/mmu.h	/^	unsigned sd_lim_15_0 : 16;  \/\/ Low bits of segment limit$/;"	m	struct:Segdesc
-sd_lim_19_16	include/kernel/mmu.h	/^	unsigned sd_lim_19_16 : 4;  \/\/ High bits of segment limit$/;"	m	struct:Segdesc
-sd_p	include/kernel/mmu.h	/^	unsigned sd_p : 1;          \/\/ Present$/;"	m	struct:Segdesc
-sd_rsv1	include/kernel/mmu.h	/^	unsigned sd_rsv1 : 1;       \/\/ Reserved$/;"	m	struct:Segdesc
-sd_s	include/kernel/mmu.h	/^	unsigned sd_s : 1;          \/\/ 0 = system, 1 = application$/;"	m	struct:Segdesc
-sd_type	include/kernel/mmu.h	/^	unsigned sd_type : 4;       \/\/ Segment type (see STS_ constants)$/;"	m	struct:Segdesc
-segment	include/kernel/mmu.h	/^	uint32_t segment          : 16;\/\/segment selector$/;"	m	struct:GateDescriptor
-segment	include/memory.h	/^	uint32_t segment          : 16;$/;"	m	struct:GateDescriptor
+save_idt	include/x86.h	/^save_idt(void *addr, uint32_t size){$/;"	f
+segment	include/mmu.h	/^	uint32_t segment          : 16;\/\/segment selector$/;"	m	struct:GateDescriptor
+segment_type	include/mmu.h	/^	uint32_t segment_type        : 1;$/;"	m	struct:SegmentDescriptor
 serial_idle	kernel/device/serial.c	/^serial_idle(void) {$/;"	f	file:
 serial_printc	kernel/device/serial.c	/^serial_printc(char ch) {$/;"	f
 set_intr	kernel/irq/idt.c	/^set_intr(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl) {$/;"	f	file:
 set_keyboard_intr_handler	kernel/irq/irq_handle.c	/^set_keyboard_intr_handler( void (*ptr)(int) ) {$/;"	f
+set_segment	kernel/memory/kvm.c	/^set_segment(SegDesc *ptr, uint32_t pl, uint32_t type) {$/;"	f	file:
 set_timer_intr_handler	kernel/irq/irq_handle.c	/^set_timer_intr_handler( void (*ptr)(void) ) {$/;"	f
 set_trap	kernel/irq/idt.c	/^set_trap(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl) {$/;"	f	file:
+set_tss	kernel/memory/kvm.c	/^set_tss(SegDesc *ptr) {$/;"	f	file:
+set_tss_esp0	kernel/memory/kvm.c	/^inline void set_tss_esp0(uint32_t esp) {$/;"	f
 shentsize	boot/boot.h	/^	unsigned short shentsize;$/;"	m	struct:ELFHeader
 shnum	boot/boot.h	/^	unsigned short shnum;$/;"	m	struct:ELFHeader
 shoff	boot/boot.h	/^	unsigned int   shoff;$/;"	m	struct:ELFHeader
 shstrndx	boot/boot.h	/^	unsigned short shstrndx;$/;"	m	struct:ELFHeader
 size_t	include/types.h	/^typedef uint32_t size_t;$/;"	t
 snprintf	lib/printfmt.c	/^snprintf(char *buf, int n, const char *fmt, ...)$/;"	f
+soft_use	include/mmu.h	/^	uint32_t soft_use            : 1;$/;"	m	struct:SegmentDescriptor
 sprintbuf	lib/printfmt.c	/^struct sprintbuf {$/;"	s	file:
 sprintputch	lib/printfmt.c	/^sprintputch(int ch, struct sprintbuf *b)$/;"	f	file:
+ss0	include/mmu.h	/^	uint32_t ss0;          \/\/ after an increase in privilege level$/;"	m	struct:__anon2
 ssize_t	include/types.h	/^typedef int32_t ssize_t;$/;"	t
 start	boot/start.S	/^start:$/;"	l
 start32	boot/start.S	/^start32:$/;"	l
@@ -432,56 +546,57 @@ strncmp	lib/string.c	/^strncmp(const char *p, const char *q, size_t n)$/;"	f
 strncpy	lib/string.c	/^strncpy(char *dst, const char *src, size_t size) {$/;"	f
 strnlen	lib/string.c	/^strnlen(const char *s, size_t size)$/;"	f
 strtol	lib/string.c	/^strtol(const char *s, char **endptr, int base)$/;"	f
-system	include/kernel/mmu.h	/^	uint32_t system           : 1;\/\/must be 0(system)$/;"	m	struct:GateDescriptor
-system	include/memory.h	/^	uint32_t system           : 1;$/;"	m	struct:GateDescriptor
+system	include/mmu.h	/^	uint32_t system           : 1;\/\/must be 0(system)$/;"	m	struct:GateDescriptor
 tlbflush	include/x86.h	/^tlbflush(void)$/;"	f
 true	include/types.h	/^enum { false, true };$/;"	e	enum:__anon1
-ts_cr3	include/kernel/mmu.h	/^	physaddr_t ts_cr3;	\/\/ Page directory base$/;"	m	struct:Taskstate
-ts_cs	include/kernel/mmu.h	/^	uint16_t ts_cs;$/;"	m	struct:Taskstate
-ts_ds	include/kernel/mmu.h	/^	uint16_t ts_ds;$/;"	m	struct:Taskstate
-ts_eax	include/kernel/mmu.h	/^	uint32_t ts_eax;	\/\/ More saved state (registers)$/;"	m	struct:Taskstate
-ts_ebp	include/kernel/mmu.h	/^	uintptr_t ts_ebp;$/;"	m	struct:Taskstate
-ts_ebx	include/kernel/mmu.h	/^	uint32_t ts_ebx;$/;"	m	struct:Taskstate
-ts_ecx	include/kernel/mmu.h	/^	uint32_t ts_ecx;$/;"	m	struct:Taskstate
-ts_edi	include/kernel/mmu.h	/^	uint32_t ts_edi;$/;"	m	struct:Taskstate
-ts_edx	include/kernel/mmu.h	/^	uint32_t ts_edx;$/;"	m	struct:Taskstate
-ts_eflags	include/kernel/mmu.h	/^	uint32_t ts_eflags;$/;"	m	struct:Taskstate
-ts_eip	include/kernel/mmu.h	/^	uintptr_t ts_eip;	\/\/ Saved state from last task switch$/;"	m	struct:Taskstate
-ts_es	include/kernel/mmu.h	/^	uint16_t ts_es;		\/\/ Even more saved state (segment selectors)$/;"	m	struct:Taskstate
-ts_esi	include/kernel/mmu.h	/^	uint32_t ts_esi;$/;"	m	struct:Taskstate
-ts_esp	include/kernel/mmu.h	/^	uintptr_t ts_esp;$/;"	m	struct:Taskstate
-ts_esp0	include/kernel/mmu.h	/^	uintptr_t ts_esp0;	\/\/ Stack pointers and segment selectors$/;"	m	struct:Taskstate
-ts_esp1	include/kernel/mmu.h	/^	uintptr_t ts_esp1;$/;"	m	struct:Taskstate
-ts_esp2	include/kernel/mmu.h	/^	uintptr_t ts_esp2;$/;"	m	struct:Taskstate
-ts_fs	include/kernel/mmu.h	/^	uint16_t ts_fs;$/;"	m	struct:Taskstate
-ts_gs	include/kernel/mmu.h	/^	uint16_t ts_gs;$/;"	m	struct:Taskstate
-ts_iomb	include/kernel/mmu.h	/^	uint16_t ts_iomb;	\/\/ I\/O map base address$/;"	m	struct:Taskstate
-ts_ldt	include/kernel/mmu.h	/^	uint16_t ts_ldt;$/;"	m	struct:Taskstate
-ts_link	include/kernel/mmu.h	/^	uint32_t ts_link;	\/\/ Old ts selector$/;"	m	struct:Taskstate
-ts_padding1	include/kernel/mmu.h	/^	uint16_t ts_padding1;$/;"	m	struct:Taskstate
-ts_padding10	include/kernel/mmu.h	/^	uint16_t ts_padding10;$/;"	m	struct:Taskstate
-ts_padding2	include/kernel/mmu.h	/^	uint16_t ts_padding2;$/;"	m	struct:Taskstate
-ts_padding3	include/kernel/mmu.h	/^	uint16_t ts_padding3;$/;"	m	struct:Taskstate
-ts_padding4	include/kernel/mmu.h	/^	uint16_t ts_padding4;$/;"	m	struct:Taskstate
-ts_padding5	include/kernel/mmu.h	/^	uint16_t ts_padding5;$/;"	m	struct:Taskstate
-ts_padding6	include/kernel/mmu.h	/^	uint16_t ts_padding6;$/;"	m	struct:Taskstate
-ts_padding7	include/kernel/mmu.h	/^	uint16_t ts_padding7;$/;"	m	struct:Taskstate
-ts_padding8	include/kernel/mmu.h	/^	uint16_t ts_padding8;$/;"	m	struct:Taskstate
-ts_padding9	include/kernel/mmu.h	/^	uint16_t ts_padding9;$/;"	m	struct:Taskstate
-ts_ss	include/kernel/mmu.h	/^	uint16_t ts_ss;$/;"	m	struct:Taskstate
-ts_ss0	include/kernel/mmu.h	/^	uint16_t ts_ss0;	\/\/   after an increase in privilege level$/;"	m	struct:Taskstate
-ts_ss1	include/kernel/mmu.h	/^	uint16_t ts_ss1;$/;"	m	struct:Taskstate
-ts_ss2	include/kernel/mmu.h	/^	uint16_t ts_ss2;$/;"	m	struct:Taskstate
-ts_t	include/kernel/mmu.h	/^	uint16_t ts_t;		\/\/ Trap on task switch$/;"	m	struct:Taskstate
+ts_cr3	include/mmu.h	/^	physaddr_t ts_cr3;	\/\/ Page directory base$/;"	m	struct:Taskstate
+ts_cs	include/mmu.h	/^	uint16_t ts_cs;$/;"	m	struct:Taskstate
+ts_ds	include/mmu.h	/^	uint16_t ts_ds;$/;"	m	struct:Taskstate
+ts_eax	include/mmu.h	/^	uint32_t ts_eax;	\/\/ More saved state (registers)$/;"	m	struct:Taskstate
+ts_ebp	include/mmu.h	/^	uintptr_t ts_ebp;$/;"	m	struct:Taskstate
+ts_ebx	include/mmu.h	/^	uint32_t ts_ebx;$/;"	m	struct:Taskstate
+ts_ecx	include/mmu.h	/^	uint32_t ts_ecx;$/;"	m	struct:Taskstate
+ts_edi	include/mmu.h	/^	uint32_t ts_edi;$/;"	m	struct:Taskstate
+ts_edx	include/mmu.h	/^	uint32_t ts_edx;$/;"	m	struct:Taskstate
+ts_eflags	include/mmu.h	/^	uint32_t ts_eflags;$/;"	m	struct:Taskstate
+ts_eip	include/mmu.h	/^	uintptr_t ts_eip;	\/\/ Saved state from last task switch$/;"	m	struct:Taskstate
+ts_es	include/mmu.h	/^	uint16_t ts_es;		\/\/ Even more saved state (segment selectors)$/;"	m	struct:Taskstate
+ts_esi	include/mmu.h	/^	uint32_t ts_esi;$/;"	m	struct:Taskstate
+ts_esp	include/mmu.h	/^	uintptr_t ts_esp;$/;"	m	struct:Taskstate
+ts_esp0	include/mmu.h	/^	uintptr_t ts_esp0;	\/\/ Stack pointers and segment selectors$/;"	m	struct:Taskstate
+ts_esp1	include/mmu.h	/^	uintptr_t ts_esp1;$/;"	m	struct:Taskstate
+ts_esp2	include/mmu.h	/^	uintptr_t ts_esp2;$/;"	m	struct:Taskstate
+ts_fs	include/mmu.h	/^	uint16_t ts_fs;$/;"	m	struct:Taskstate
+ts_gs	include/mmu.h	/^	uint16_t ts_gs;$/;"	m	struct:Taskstate
+ts_iomb	include/mmu.h	/^	uint16_t ts_iomb;	\/\/ I\/O map base address$/;"	m	struct:Taskstate
+ts_ldt	include/mmu.h	/^	uint16_t ts_ldt;$/;"	m	struct:Taskstate
+ts_link	include/mmu.h	/^	uint32_t ts_link;	\/\/ Old ts selector$/;"	m	struct:Taskstate
+ts_padding1	include/mmu.h	/^	uint16_t ts_padding1;$/;"	m	struct:Taskstate
+ts_padding10	include/mmu.h	/^	uint16_t ts_padding10;$/;"	m	struct:Taskstate
+ts_padding2	include/mmu.h	/^	uint16_t ts_padding2;$/;"	m	struct:Taskstate
+ts_padding3	include/mmu.h	/^	uint16_t ts_padding3;$/;"	m	struct:Taskstate
+ts_padding4	include/mmu.h	/^	uint16_t ts_padding4;$/;"	m	struct:Taskstate
+ts_padding5	include/mmu.h	/^	uint16_t ts_padding5;$/;"	m	struct:Taskstate
+ts_padding6	include/mmu.h	/^	uint16_t ts_padding6;$/;"	m	struct:Taskstate
+ts_padding7	include/mmu.h	/^	uint16_t ts_padding7;$/;"	m	struct:Taskstate
+ts_padding8	include/mmu.h	/^	uint16_t ts_padding8;$/;"	m	struct:Taskstate
+ts_padding9	include/mmu.h	/^	uint16_t ts_padding9;$/;"	m	struct:Taskstate
+ts_ss	include/mmu.h	/^	uint16_t ts_ss;$/;"	m	struct:Taskstate
+ts_ss0	include/mmu.h	/^	uint16_t ts_ss0;	\/\/   after an increase in privilege level$/;"	m	struct:Taskstate
+ts_ss1	include/mmu.h	/^	uint16_t ts_ss1;$/;"	m	struct:Taskstate
+ts_ss2	include/mmu.h	/^	uint16_t ts_ss2;$/;"	m	struct:Taskstate
+ts_t	include/mmu.h	/^	uint16_t ts_t;		\/\/ Trap on task switch$/;"	m	struct:Taskstate
+tss	kernel/memory/kvm.c	/^static TSS tss; $/;"	v	file:
 type	boot/boot.h	/^	unsigned int type;$/;"	m	struct:ProgramHeader
 type	boot/boot.h	/^	unsigned short type;$/;"	m	struct:ELFHeader
-type	include/kernel/mmu.h	/^	uint32_t type             : 4;\/\/type(STS_{TG,IG32,TG32})$/;"	m	struct:GateDescriptor
-type	include/memory.h	/^	uint32_t type             : 4;$/;"	m	struct:GateDescriptor
+type	include/mmu.h	/^	uint32_t type                : 4;$/;"	m	struct:SegmentDescriptor
+type	include/mmu.h	/^	uint32_t type             : 4;\/\/type(STS_{TG,IG32,TG32})$/;"	m	struct:GateDescriptor
 uint16_t	include/types.h	/^typedef unsigned short uint16_t;$/;"	t
 uint32_t	include/types.h	/^typedef unsigned int uint32_t;$/;"	t
 uint64_t	include/types.h	/^typedef unsigned long long uint64_t;$/;"	t
 uint8_t	include/types.h	/^typedef unsigned char uint8_t;$/;"	t
 uintptr_t	include/types.h	/^typedef uint32_t uintptr_t;$/;"	t
+unused	kernel/device/keyboard.c	/^uint8_t unused = false;\/\/keyboard state untrack$/;"	v
 va_arg	include/stdarg.h	9;"	d
 va_end	include/stdarg.h	11;"	d
 va_list	include/stdarg.h	/^typedef __builtin_va_list va_list;$/;"	t
@@ -498,5 +613,4 @@ waitdisk	boot/main.c	/^waitdisk(void) {$/;"	f
 warn	include/assert.h	11;"	d
 write_eflags	include/x86.h	/^write_eflags(uint32_t eflags)$/;"	f
 xchg	include/x86.h	/^xchg(volatile uint32_t *addr, uint32_t newval)$/;"	f
-xxx	include/kernel/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
-xxx	include/memory.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
+xxx	include/mmu.h	/^	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;$/;"	m	struct:TrapFrame
