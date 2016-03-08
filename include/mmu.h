@@ -7,6 +7,10 @@
  * the %cr0, %cr4, and %eflags registers, and traps.
  */
 
+#define MAXMEM			0x8000000
+#define KERNEL_SIZE		0x400000
+#define USER_STACK_SIZE	0x4096
+
 
 
 
@@ -66,11 +70,15 @@
 #define DPL_KERNEL              0
 #define DPL_USER                3
 
+//type for desc
 #define SEG_WRITABLE			0X2
 #define SEG_READABLE			0X2
 #define SEG_EXECUTABLE			0X8
+#define SEG_RW_DATA				0x2 //WRITEBLE
+#define SEG_EXE_CODE			0xa	//READABLE|EXECUTABLE
 
 
+//use in page mode, maybe can be drop
 #define NR_SEGMENTS             3
 #define SEG_KERNEL_CODE         1 
 #define SEG_KERNEL_DATA         2
@@ -78,6 +86,8 @@
 #define SEG_USER_DATA			4
 #define SEG_TSS					5
 
+
+//construct the selector for kernel or user
 #define SELECTOR_KERNEL(s)		( (s << 3) | DPL_KERNEL )
 #define SELECTOR_USER(s)		( (s << 3) | DPL_USER )
 
@@ -99,6 +109,21 @@
 #else	// not __ASSEMBLER__
 
 #include <include/types.h>
+
+/*
+ *
+ * type:
+ *|bit 3|Data/Code	|	0/1	|
+ *|bit 2|Expend-down|	0(normal)/1(expand-down) |
+ *|bit 1|Writeble	|	0(read-only/execute-only) / 1(RW/executable and readable|
+ *|bit 0|Accessed	|	0(hasn't been accessed)/1(accessed)|
+ *
+ * userful type:
+ * 0x2 for R/W data segment
+ * 0xa for executable code segment
+ *
+ */
+
 
 
 // Segment Descriptors
