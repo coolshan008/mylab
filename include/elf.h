@@ -25,7 +25,7 @@ struct ELFHeader {
 };
 
 /* ELF32 Program header */
-struct ProgramHeader {
+typedef struct ProgramHeader {
 	unsigned int type;
 	unsigned int off;
 	unsigned int vaddr;
@@ -34,7 +34,7 @@ struct ProgramHeader {
 	unsigned int memsz;
 	unsigned int flags;
 	unsigned int align;
-};
+}ProgramHeader;
 
 
 

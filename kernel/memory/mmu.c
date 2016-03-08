@@ -1,3 +1,5 @@
+#include "include/stdio.h"
+#include "include/assert.h"
 #include "include/x86.h"
 #include "include/segNode.h"
 #include "include/elf.h"
@@ -42,11 +44,14 @@ segment_malloc(ProgramHeader *ph, SegDesc *idt, int32_t count){
 	//malloc memory of n * align size
 	if(Node -> size ==0)
 		Node -> active =false;
-	switch(ph->flags){
-		case 6:SegDesc[count]=SEG(SEG_RW_DATA,pa,n * align,DPL_USER);break;
-		case 5:SegDesc[count]=SEG(SEG_EXE_CODE,pa,n * align,DPL_USER);break;
-		default:assert(0);
-	}
+
+	if(ph->flags==6)
+		SEG(idt + count,SEG_RW_DATA,pa,n * align,DPL_USER);
+	else if(ph->flags==5)
+		SEG(idt + count,SEG_EXE_CODE,pa,n * align,DPL_USER);
+	else
+		assert(0);
+
 	count++;
 	return pa;
 }
@@ -57,7 +62,7 @@ void stack_malloc(SegDesc *idt, int32_t count){
 	uint32_t pa = Node -> start;
 	Node ->start += USER_STACK_SIZE;
 	Node ->size -= USER_STACK_SIZE;
-	SegDesc[count]=SEG(SEG_RW_DATA,pa,USER_STACK_SIZE,DPL_USER);
+	SEG(idt + count,SEG_RW_DATA,pa,USER_STACK_SIZE,DPL_USER);
 	count++;
 }//need to fill PCB
 

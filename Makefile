@@ -99,6 +99,11 @@ debug: $(IMAGE)
 gdb:
 	$(GDB) $(GDB_OPTIONS)
 
+git:
+	@make clean
+	@git -A
+	git commit
+
 clean:
 	@rm -rf $(OBJ_DIR) 2> /dev/null
 	@rm -rf $(BOOT)    2> /dev/null

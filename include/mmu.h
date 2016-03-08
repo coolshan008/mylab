@@ -148,7 +148,7 @@ typedef struct SegmentDescriptor {
 // Segment that is loadable but faults when used
 #define SEG_FAULT	(struct SegDesc){ 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0 }
 // Normal segment
-#define SEG(type, base, lim, dpl) (struct SegDesc)			\
+/*#define SEG(type, base, lim, dpl) (struct SegDesc)\
 { ((lim) >> 12) & 0xffff, (base) & 0xffff, ((base) >> 16) & 0xff,	\
     type, 1, dpl, 1, (unsigned) (lim) >> 28, 0, 0, 1, 1,		\
     (unsigned) (base) >> 24 }
@@ -156,6 +156,42 @@ typedef struct SegmentDescriptor {
 { (lim) & 0xffff, (base) & 0xffff, ((base) >> 16) & 0xff,		\
     type, 1, dpl, 1, (unsigned) (lim) >> 16, 0, 0, 1, 0,		\
     (unsigned) (base) >> 24 }
+*/
+static inline void
+SEG(SegDesc *ptr, uint32_t type,uint32_t base, uint32_t limit, uint32_t dpl){
+	ptr->limit_15_0  = (limit >> 12 ) & 0xFFFF;
+	ptr->base_15_0   = base & 0xffff;
+	ptr->base_23_16  = (base >> 16) & 0xff;
+	ptr->type = type;
+	ptr->segment_type = 1;
+	ptr->privilege_level = dpl;
+	ptr->present = 1;
+	ptr->limit_19_16 = limit >> 28;
+	ptr->soft_use = 0;
+	ptr->operation_size = 0;
+	ptr->pad0 = 1;
+	ptr->granularity = 1;
+	ptr->base_31_24  = base >> 24;
+}
+
+
+static inline void
+SEG16(SegDesc *ptr, uint32_t type,uint32_t base, uint32_t limit, uint32_t dpl){
+	ptr->limit_15_0  = limit & 0xFFFF;
+	ptr->base_15_0   = base & 0xffff;
+	ptr->base_23_16  = (base >> 16) & 0xff;
+	ptr->type = type;
+	ptr->segment_type = 1;
+	ptr->privilege_level = dpl;
+	ptr->present = 1;
+	ptr->limit_19_16 = limit >> 16;
+	ptr->soft_use = 0;
+	ptr->operation_size = 0;
+	ptr->pad0 = 1;
+	ptr->granularity = 0;
+	ptr->base_31_24  = base >> 24;
+}
+
 
 #endif /* !__ASSEMBLER__ */
 
