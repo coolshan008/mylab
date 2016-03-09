@@ -6,5 +6,11 @@
 
 
 void main_loop(){
-	while(1);
+	printk("game start!\n");
+	int i=0;
+	while(1){
+		if(i==1000)
+			printk("haha\n");
+		i=(i+1)%10000;
+	}
 }

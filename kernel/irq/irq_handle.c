@@ -17,6 +17,7 @@ set_keyboard_intr_handler( void (*ptr)(int) ) {
 }
 
 
+void print_stack(TrapFrame *tf);
 
 /* TrapFrame的定义在include/memory.h
  * 请仔细理解这段程序的含义，这些内容将在后续的实验中被反复使用。 */
@@ -37,6 +38,7 @@ irq_handle(struct TrapFrame *tf) {
 	}
 
 	else if (tf->irq == 1000) {
+		printk("timer\n");
 		do_timer();
 	}
 	else if (tf->irq == 1001) {
@@ -50,5 +52,6 @@ irq_handle(struct TrapFrame *tf) {
 	} else {
 		assert(0);
 	}
+	print_stack(tf);
 }
 

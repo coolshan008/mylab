@@ -132,3 +132,4 @@ clean:
 	@rm -rf $(BOOT)    2> /dev/null
 	@rm -rf $(KERNEL)  2> /dev/null
 	@rm -rf $(IMAGE)   2> /dev/null
+	@rm -rf $(USER)    2> /dev/null

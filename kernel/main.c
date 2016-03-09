@@ -16,7 +16,6 @@ int main(){
 	init_intr();
 	init_keyboard();
 	blue_screen();
-	printk("game start!\n");
 	enable_interrupt();
 	main_loop();
 	assert(0);
