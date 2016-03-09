@@ -42,14 +42,14 @@ void print_stack(TrapFrame *tf)
 
 //	printk("gs = %d\n",tf->gs);
 //	printk("fs = %d\n",tf->fs);
-	printk("es = %d\n",tf->es);
-	printk("ds = %d\n",tf->ds);
+	printk("es = %x\n",tf->es);
+	printk("ds = %x\n",tf->ds);
 	printk("irq = %d\n",tf->irq);
-	printk("err = %d\n",tf->err);
+	printk("err = %x\n",tf->err);
 	printk("eip = 0x%x\n",tf->eip);
 
 
-	printk("cs = %d\n",tf->cs);
+	printk("cs = 0x%x\n",tf->cs);
 	printk("eflags = 0x%x\n",tf->eflags);
 	printk("esp = 0x%x\n",tf->esp);
 	printk("ss = %d\n",tf->ss);

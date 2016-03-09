@@ -10,6 +10,7 @@
 
 
 int main(){
+	printk("start kernel!!!!!!!!!\n");
 	init_serial();
 	init_timer();
 	init_idt();

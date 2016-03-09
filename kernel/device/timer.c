@@ -10,7 +10,7 @@
 
 void
 do_timer(){
-	;
+	;//printk("haha\n");
 }
 
 

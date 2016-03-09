@@ -38,8 +38,9 @@ irq_handle(struct TrapFrame *tf) {
 	}
 
 	else if (tf->irq == 1000) {
-		printk("timer\n");
+		//printk("timer\n");
 		do_timer();
+		//print_stack(tf);
 	}
 	else if (tf->irq == 1001) {
 		uint32_t code = inb(0x60);
@@ -52,6 +53,6 @@ irq_handle(struct TrapFrame *tf) {
 	} else {
 		assert(0);
 	}
-	print_stack(tf);
+	//print_stack(tf);
 }
 
