@@ -30,7 +30,8 @@ segment_malloc(ProgramHeader *ph, TrapFrame *tf, int32_t *count){
 	printk("Here work in segment_malloc in %s\n",__FILE__);
 	uint32_t memsz = ph->memsz;
 	uint32_t align = ph->align;
-	uint32_t n = (memsz % align) + 1;
+	uint32_t n = (memsz / align) + 1;
+	printk("n= %d in %s\n",__FILE__,n);
 	segment_Node *Node = get_free_node(n * align);
 	if(Node == NULL)
 		assert(0);

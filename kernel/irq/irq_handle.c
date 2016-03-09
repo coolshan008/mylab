@@ -1,6 +1,7 @@
 #include "include/x86.h"
 #include "include/stdio.h"
 #include "include/assert.h"
+#include "include/syscall.h"
 //#include "game.h"
 
 static void (*do_timer)(void);
@@ -25,15 +26,20 @@ irq_handle(struct TrapFrame *tf) {
 		if(tf->irq == -1) {
 			printk("%s, %d: Unhandled exception!\n", __FUNCTION__, __LINE__);
 		}
+		else if(tf->irq == 0x80){
+			tf->eax = syscall(tf->eax,tf->ebx,tf->ecx,tf->edx,tf->esi,tf->edi);
+			return;
+		}
 		else {
 			printk("%s, %d: Unexpected exception #%d!\n", __FUNCTION__, __LINE__, tf->irq);
 		}
 		assert(0);
 	}
 
-	if (tf->irq == 1000) {
+	else if (tf->irq == 1000) {
 		do_timer();
-	} else if (tf->irq == 1001) {
+	}
+	else if (tf->irq == 1001) {
 		uint32_t code = inb(0x60);
 		uint32_t val = inb(0x61);
 		outb(0x61, val | 0x80);

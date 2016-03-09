@@ -1,7 +1,7 @@
 //System call
 
 //#include "syscall.h"
-#include "lib.h"
+#include "user/lib.h"
 
 #define T_SYSCALL   0x80
 

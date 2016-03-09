@@ -1,5 +1,6 @@
 BOOT   := boot.bin
 KERNEL := kernel.bin
+USER   := user.bin
 IMAGE  := disk.bin
 
 CC      := gcc
@@ -17,6 +18,7 @@ CFLAGS += -O0 #不开优化, 方便调试
 CFLAGS += -fno-builtin #禁止内置函数
 CFLAGS += -ggdb3 #GDB调试信息
 
+
 QEMU_OPTIONS := -serial stdio #以标准输入输为串口(COM1)
 QEMU_OPTIONS += -d int #输出中断信息
 QEMU_OPTIONS += -monitor telnet:127.0.0.1:1111,server,nowait #telnet monitor
@@ -31,9 +33,11 @@ OBJ_DIR        := obj
 LIB_DIR        := lib
 BOOT_DIR       := boot
 KERNEL_DIR     := kernel
+USER_DIR       := user
 OBJ_LIB_DIR    := $(OBJ_DIR)/$(LIB_DIR)
 OBJ_BOOT_DIR   := $(OBJ_DIR)/$(BOOT_DIR)
 OBJ_KERNEL_DIR := $(OBJ_DIR)/$(KERNEL_DIR)
+OBJ_USER_DIR   := $(OBJ_DIR)/$(USER_DIR)
 
 LD_SCRIPT := $(shell find $(KERNEL_DIR) -name "*.ld")
 
@@ -49,6 +53,12 @@ KERNEL_C := $(shell find $(KERNEL_DIR) -name "*.c")
 KERNEL_S := $(shell find $(KERNEL_DIR) -name "*.S")
 KERNEL_O := $(KERNEL_C:%.c=$(OBJ_DIR)/%.o)
 KERNEL_O += $(KERNEL_S:%.S=$(OBJ_DIR)/%.o)
+
+
+USER_C := $(shell find $(USER_DIR) -name "*.c")
+USER_S := $(shell find $(USER_DIR) -name "*.S")
+USER_O := $(USER_C:%.c=$(OBJ_DIR)/%.o)
+USER_O += $(USER_S:%.S=$(OBJ_DIR)/%.o)
 
 $(IMAGE): $(BOOT) $(KERNEL)
 	@$(DD) if=/dev/zero of=$(IMAGE) count=10000         > /dev/null # 准备磁盘文件
@@ -71,13 +81,25 @@ $(OBJ_BOOT_DIR)/%.o: $(BOOT_DIR)/%.c
 
 $(KERNEL): $(LD_SCRIPT)
 $(KERNEL): $(KERNEL_O) $(LIB_O)
-	$(LD) -m elf_i386 -T $(LD_SCRIPT) -nostdlib -o $@ $^ $(shell $(CC) $(CFLAGS) -print-libgcc-file-name)
+	$(LD) -m elf_i386 -T $(LD_SCRIPT) -nostdlib -o $@.out $^ $(shell $(CC) $(CFLAGS) -print-libgcc-file-name)
+	@rm $@.out
+	perl genkernel.pl $@
+
+$(USER): $(USER_O) $(LIB_O)
+	$(LD) -e start -Ttext=0x0 -m elf_i386 -nostdlib -o $@.out $^
+	@rm $@.out
+	perl user/genuser.pl $@
+
 
 $(OBJ_LIB_DIR)/%.o : $(LIB_DIR)/%.c
 	@mkdir -p $(OBJ_LIB_DIR)
 	$(CC) $(CFLAGS) $< -o $@
 
 $(OBJ_KERNEL_DIR)/%.o: $(KERNEL_DIR)/%.[cS]
+	mkdir -p $(OBJ_DIR)/$(dir $<)
+	$(CC) $(CFLAGS) $< -o $@
+
+$(OBJ_USER_DIR)/%.o: $(USER_DIR)/%.[cS]
 	mkdir -p $(OBJ_DIR)/$(dir $<)
 	$(CC) $(CFLAGS) $< -o $@
 

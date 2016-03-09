@@ -20,13 +20,8 @@ print STDERR "Kernel binary file size n = $n\n";
 print STDERR "Kernel binary file sectors num m = $m\n";
 print STDERR "Kernel binary file added 0 bytes s = $s\n";
 
-
-#$buf .= "\0" x ( 512 - $m);
 $buf .= "\0" x $p;
 
-#print STDERR "*******************************************\n";
-#print STDERR "*******************************************\n";
-#print STDERR "*******************************************\n";
 
 open(SIG, ">$ARGV[0]") || die "open >$ARGV[0]: $!";
 print SIG $buf;
