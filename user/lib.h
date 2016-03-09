@@ -2,7 +2,6 @@
 #define _LIB_H_
 
 #include "types.h"
-#include "const.h"
 //#include "debug.h"
 //#include "kernel.h"
 //syscall.c

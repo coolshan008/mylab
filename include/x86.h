@@ -348,4 +348,12 @@ write_ldt(uint16_t selector) {
 	asm volatile("lldt %0" : : "r"(selector));
 }
 
+static inline int
+in_long(short port){
+	int data;
+	asm volatile("in %1,%0" : "=a" (data) : "d" (port));
+	return data;
+}
+
+
 #endif /* !JOS_INC_X86_H */

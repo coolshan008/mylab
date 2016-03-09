@@ -1,3 +1,4 @@
+#include "include/mmu.h"
 # 中断和异常处理函数的入口
 # 中断处理函数会在IDT中为相应的中断/异常设置处理程序
 # 中断/异常的行为参见i386手册
@@ -25,17 +26,6 @@
 #need more code when switch(seg reg)
 .globl asm_do_irq
 .extern irq_handle
-#asm_do_irq:
-#	pushal
-#
-#	pushl %esp			# ???
-#	call irq_handle
-#	addl $4, %esp
-#
-#	popal
-#	addl $4, %esp
-#	iret
-
 asm_do_irq:
 	cli
 	pushl %ds
@@ -44,7 +34,7 @@ asm_do_irq:
 	pushl %gs
 	pushal
 
-	movw $SELECTOR_KNERNEL(SEG_KERNEL_DATA), %ax
+	movw $SEL_KEL(SEG_KERNEL_DATA), %ax
 	movw %ax, %ds
 	movw %ax, %es
 

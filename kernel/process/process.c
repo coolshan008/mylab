@@ -3,6 +3,7 @@
 #include "include/assert.h"
 #include "include/process.h"
 #include "include/string.h"
+#include "include/elf.h"
 /*
  * 没有交换上下文时设置tss的tss0
  *
@@ -23,6 +24,9 @@
 
 void set_tss_esp0(uint32_t esp);
 static ListHead ready,block,free;
+void readseg(unsigned char *pa, int count, int offset);
+uint32_t segment_malloc(ProgramHeader *, TrapFrame *, int32_t *);
+void stack_malloc(TrapFrame *, int32_t *);
 
 void print_stack(TrapFrame *tf)
 {
@@ -119,7 +123,6 @@ int process_fork(PCB **new_pcb)
 {
 	printk("process_fork %d is now working!\n",__LINE__);
 	void *tf;
-	void *idt;
 
     /*
 	   分配一个进程块，并对其进行初始化
@@ -218,13 +221,13 @@ static void process_load(PCB *pcb)
 	struct ProgramHeader *ph;
 	int i;
 	uint8_t *j;
-	unsigned long va;
 	int32_t count;
+	uint32_t pa;
 
 	unsigned char buf[4096];
 	readseg(buf,4096,USER_OFFSET);
 	elf=(struct ELFHeader *)buf;
-	ph=(struct ProgramHeader *)((uint32_t)elf+elf->phoff);
+	ph=(ProgramHeader *)((uint32_t)elf+elf->phoff);
 	//process_setup_vm(pcb);
 	for(i=0; i< elf->phnum; i++) {
 		if(ph->type==PT_LOAD){

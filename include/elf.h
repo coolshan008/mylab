@@ -2,7 +2,6 @@
 #define __ELF_H__
 
 
-#define PT_LOAD 1
 
 
 /* ELF32二进制文件头 */

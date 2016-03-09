@@ -1,5 +1,7 @@
 #include "include/x86.h"
-#include "string.h"
+#include "include/assert.h"
+#include "include/string.h"
+#include "include/stdio.h"
 
 /* This source file involves some hardware details. Please refer to 
  *  _ ____   ___    __    __  __                         _ 

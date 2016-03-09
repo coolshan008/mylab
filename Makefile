@@ -60,10 +60,11 @@ USER_S := $(shell find $(USER_DIR) -name "*.S")
 USER_O := $(USER_C:%.c=$(OBJ_DIR)/%.o)
 USER_O += $(USER_S:%.S=$(OBJ_DIR)/%.o)
 
-$(IMAGE): $(BOOT) $(KERNEL)
+$(IMAGE): $(BOOT) $(KERNEL) $(USER)
 	@$(DD) if=/dev/zero of=$(IMAGE) count=10000         > /dev/null # 准备磁盘文件
 	@$(DD) if=$(BOOT) of=$(IMAGE) conv=notrunc          > /dev/null # 填充 boot loader
 	@$(DD) if=$(KERNEL) of=$(IMAGE) seek=1 conv=notrunc > /dev/null # 填充 kernel, 跨过 mbr
+	@$(DD) if=$(USER) of=$(IMAGE) seek=2 conv=notrunc > /dev/null # >填充user
 
 $(BOOT): $(BOOT_O)
 	$(LD) -e start -Ttext=0x7C00 -m elf_i386 -nostdlib -o $@.out $^
@@ -81,13 +82,13 @@ $(OBJ_BOOT_DIR)/%.o: $(BOOT_DIR)/%.c
 
 $(KERNEL): $(LD_SCRIPT)
 $(KERNEL): $(KERNEL_O) $(LIB_O)
-	$(LD) -m elf_i386 -T $(LD_SCRIPT) -nostdlib -o $@.out $^ $(shell $(CC) $(CFLAGS) -print-libgcc-file-name)
-	@rm $@.out
+	$(LD) -m elf_i386 -T $(LD_SCRIPT) -nostdlib -o $@ $^ $(shell $(CC) $(CFLAGS) -print-libgcc-file-name)
+	#@rm $@.out
 	perl genkernel.pl $@
 
-$(USER): $(USER_O) $(LIB_O)
-	$(LD) -e start -Ttext=0x0 -m elf_i386 -nostdlib -o $@.out $^
-	@rm $@.out
+$(USER): $(USER_O) 
+	$(LD) -e main -Ttext=0x0 -m elf_i386 -nostdlib -o $@ $^
+	#@rm $@.out
 	perl user/genuser.pl $@
 
 

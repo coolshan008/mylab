@@ -105,6 +105,9 @@
 	.byte (((base) >> 16) & 0xff), (0x90 | (type)),		\
 		(0xC0 | (((lim) >> 28) & 0xf)), (((base) >> 24) & 0xff)
 
+#define SEL_KEL(s) \
+	(s << 3) & 0xffff
+
 #else	// not __ASSEMBLER__
 
 #include <include/types.h>
@@ -302,6 +305,7 @@ struct TrapFrame {
 	uint32_t ebx, edx, ecx, eax;   // Register saved by pushal
 	uint32_t gs,fs,es,ds;   // Segment register
 
+	int irq;
 	uint32_t err;
 	uint32_t eip;
 	uint16_t cs;
@@ -313,7 +317,7 @@ struct TrapFrame {
 }__attribute__((packed));
 
 
-//typedef struct TrapFrame TrapFrame;
+typedef struct TrapFrame TrapFrame;
 
 // Set up a normal interrupt/trap gate descriptor.
 // - istrap: 1 for a trap (= exception) gate, 0 for an interrupt gate.

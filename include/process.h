@@ -4,10 +4,10 @@
 //#include "common.h"
 #include "include/x86.h"
 #include "include/list.h"
-#include "include/disk_read.h"
+//#include "include/disk_read.h"
 
 
-#define STK_SZ  8192
+//#define STK_SZ  8192
 #define KSTACK_SIZE 4096
 #define PCB_Pool_NUM 128
 
@@ -16,7 +16,7 @@
 #define TASK_INTERRUPTIBLE   3
 #define TASK_UNINTERRUPTIBLE 4
 #define TASK_STOPPED         0
-#define PG_ALIGN __attribute((aligned(PG_SIZE)))
+//#define PG_ALIGN __attribute((aligned(PG_SIZE)))
 
 
 
@@ -37,7 +37,7 @@ PCB *current ;
 PCB *pcb_of_idle ;
 
 
-PCB PCBPool[PCB_Pool_NUM] PG_ALIGN;
+PCB PCBPool[PCB_Pool_NUM];
 void TrapFrame_init(TrapFrame *);
 void PCBPool_init();
 PCB* new_PCB();
