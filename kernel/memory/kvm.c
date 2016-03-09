@@ -10,62 +10,13 @@
  * |_|____/ \___/ \___/  |_|  |_|\__,_|_| |_|\__,_|\__,_|_|
  */                                                               
 
-/* These data structures are shared by all kernel threads. */
-/*static CR3 kcr3;											// kernel CR3
-static PDE kpdir[NR_PDE] align_to_page;						// kernel page directory
-static PTE kptable[PHY_MEM / PAGE_SIZE] align_to_page;		// kernel page tables
-*/
-/* You may use these interfaces in the future */
-/*inline CR3* get_kcr3() {
-	return &kcr3;
-}
 
-inline PDE* get_kpdir() {
-	return kpdir;
-}
-
-inline PTE* get_kptable() {
-	return kptable;
-}*/
-
-/* Build a page table for the kernel */
-/*void
-init_page(void) {
-	CR0 cr0;
-	CR3 cr3;
-	PDE *pdir = (PDE *)va_to_pa(kpdir);
-	PTE *ptable = (PTE *)va_to_pa(kptable);
-	uint32_t pdir_idx, ptable_idx, pframe_idx;
+static uint8_t active[NR_SEGMENTS];
 
 
-	for (pdir_idx = 0; pdir_idx < NR_PDE; pdir_idx ++) {
-		make_invalid_pde(&pdir[pdir_idx]);
-	}
-
-	pframe_idx = 0;
-	for (pdir_idx = 0; pdir_idx < PHY_MEM / PD_SIZE; pdir_idx ++) {
-		make_pde(&pdir[pdir_idx], ptable);
-		make_pde(&pdir[pdir_idx + KOFFSET / PD_SIZE], ptable);
-		for (ptable_idx = 0; ptable_idx < NR_PTE; ptable_idx ++) {
-			make_pte(ptable, (void*)(pframe_idx << 12));
-			pframe_idx ++;
-			ptable ++;
-		}
-	}
-
-	cr3.val = 0;
-	cr3.page_directory_base = ((uint32_t)pdir) >> 12;
-	write_cr3(&cr3);
-
-	cr0.val = read_cr0();
-	cr0.paging = 1;
-	write_cr0(&cr0);
-
-	kcr3.val = cr3.val;
-}
-*/
 /* One TSS will be enough for all processes in ring 3. It will be used in Lab3. */
 static TSS tss; 
+
 
 inline static void
 set_tss(SegDesc *ptr) {
@@ -88,7 +39,10 @@ set_tss(SegDesc *ptr) {
 	ptr->base_31_24  = base >> 24;
 }
 
-inline static void set_tss_esp0(uint32_t esp) {
+/*inline static void set_tss_esp0(uint32_t esp) {
+	tss.esp0 = esp;
+}*/
+void set_tss_esp0(uint32_t esp) {
 	tss.esp0 = esp;
 }
 //static may be drop
@@ -117,13 +71,30 @@ set_segment(SegDesc *ptr, uint32_t pl, uint32_t type) {
    previous one cannot be accessed in user process, because its virtual
    address below 0xC0000000, and is not in the process' address space. */
 
+uint32_t
+new_segment(uint32_t type, uint32_t base, uint32_t limit, uint32_t dpl){
+	printk("new_segment here working!\n");
+	for(uint32_t i=1;i<NR_SEGMENTS;i++){
+		if(active[i]==false){
+			SEG(&(gdt[i]),type,base,limit,dpl);
+			active[i]=true;
+			return i;//return the index of gdt
+		}
+	}
+	printk("No SegDesc available!\n");
+	assert(0);
+}
+
+
 void
 init_segment(void) {
 	memset(gdt, 0, sizeof(gdt));
+	memset(active, 0, sizeof(active));
+	active[0]=active[1]=active[2]=active[3]=true;//these segments are being used
 	set_segment(&gdt[SEG_KERNEL_CODE], DPL_KERNEL, SEG_EXECUTABLE | SEG_READABLE);
 	set_segment(&gdt[SEG_KERNEL_DATA], DPL_KERNEL, SEG_WRITABLE );
-	set_segment(&gdt[SEG_USER_CODE], DPL_USER, SEG_EXECUTABLE | SEG_READABLE);
-	set_segment(&gdt[SEG_USER_DATA], DPL_USER, SEG_WRITABLE );
+	//set_segment(&gdt[SEG_USER_CODE], DPL_USER, SEG_EXECUTABLE | SEG_READABLE);
+	//set_segment(&gdt[SEG_USER_DATA], DPL_USER, SEG_WRITABLE );
 
 	write_gdt(gdt, sizeof(gdt));
 

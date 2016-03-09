@@ -341,4 +341,11 @@ write_tr(uint16_t selector) {
 	asm volatile("ltr %0" : : "r"(selector));
 }
 
+
+
+static inline void
+write_ldt(uint16_t selector) {
+	asm volatile("lldt %0" : : "r"(selector));
+}
+
 #endif /* !JOS_INC_X86_H */

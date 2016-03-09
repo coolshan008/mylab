@@ -25,13 +25,40 @@
 #need more code when switch(seg reg)
 .globl asm_do_irq
 .extern irq_handle
+#asm_do_irq:
+#	pushal
+#
+#	pushl %esp			# ???
+#	call irq_handle
+#	addl $4, %esp
+#
+#	popal
+#	addl $4, %esp
+#	iret
+
 asm_do_irq:
+	cli
+	pushl %ds
+	pushl %es
+	pushl %fs
+	pushl %gs
 	pushal
 
-	pushl %esp			# ???
+	movw $SELECTOR_KNERNEL(SEG_KERNEL_DATA), %ax
+	movw %ax, %ds
+	movw %ax, %es
+
+	pushl %esp
 	call irq_handle
 	addl $4, %esp
 
+	
 	popal
-	addl $4, %esp
+	popl %gs
+	popl %fs
+	popl %es
+	popl %ds
+	addl $8, %esp
+
 	iret
+

@@ -11,7 +11,10 @@ BOOT_DIR	Makefile	/^BOOT_DIR       := boot$/;"	m
 BOOT_O	Makefile	/^BOOT_O := $(BOOT_S:%.S=$(OBJ_DIR)\/%.o)$/;"	m
 BOOT_S	Makefile	/^BOOT_S := $(wildcard $(BOOT_DIR)\/*.S)$/;"	m
 CC	Makefile	/^CC      := gcc$/;"	m
+CC	user/Makefile	/^CC      = gcc$/;"	m
+CFILES	user/Makefile	/^CFILES  = $(shell find  -name "*.c")$/;"	m
 CFLAGS	Makefile	/^CFLAGS := -Wall -Werror -Wfatal-errors #开启所有警告, 视警告为错误, 第一个错误结束编译$/;"	m
+CFLAGS	user/Makefile	/^CFLAGS  = -c -static -ggdb -m32 -MD -Wall -O2 -fno-builtin \\$/;"	m
 CMDBYTE	include/kbdreg.h	204;"	d
 CR0_AM	include/mmu.h	26;"	d
 CR0_CD	include/mmu.h	28;"	d
@@ -37,6 +40,8 @@ DPL_KERNEL	include/mmu.h	70;"	d
 DPL_USER	include/mmu.h	71;"	d
 ELFHeader	boot/boot.h	/^struct ELFHeader {$/;"	s
 ELFHeader	include/elf.h	/^struct ELFHeader {$/;"	s
+ELF_MAGIC	kernel/process/process.c	14;"	d	file:
+ELF_PROG_LOAD	kernel/process/process.c	15;"	d	file:
 E_BAD_ENV	lib/printfmt.c	/^	E_BAD_ENV	= 2,	\/\/ Environment doesn't exist or otherwise$/;"	e	enum:__anon3	file:
 E_FAULT	lib/printfmt.c	/^	E_FAULT		= 6,	\/\/ Memory fault$/;"	e	enum:__anon3	file:
 E_INVAL	lib/printfmt.c	/^	E_INVAL		= 3,	\/\/ Invalid parameter$/;"	e	enum:__anon3	file:
@@ -44,6 +49,7 @@ E_NO_FREE_ENV	lib/printfmt.c	/^	E_NO_FREE_ENV	= 5,	\/\/ Attempt to create a new 
 E_NO_MEM	lib/printfmt.c	/^	E_NO_MEM	= 4,	\/\/ Request failed due to memory shortage$/;"	e	enum:__anon3	file:
 E_NO_SYS	lib/printfmt.c	/^	E_NO_SYS	= 7,	\/\/ Unimplemented system call$/;"	e	enum:__anon3	file:
 E_UNSPECIFIED	lib/printfmt.c	/^	E_UNSPECIFIED	= 1,	\/\/ Unspecified or unknown problem$/;"	e	enum:__anon3	file:
+FALSE	user/const.h	5;"	d
 FL_AC	include/mmu.h	57;"	d
 FL_AF	include/mmu.h	42;"	d
 FL_CF	include/mmu.h	40;"	d
@@ -219,13 +225,18 @@ KEY_W	include/kbdreg.h	22;"	d
 KEY_X	include/kbdreg.h	50;"	d
 KEY_Y	include/kbdreg.h	26;"	d
 KEY_Z	include/kbdreg.h	49;"	d
+KSTACK_SIZE	include/process.h	14;"	d
 K_LDCMDBYTE	include/kbdreg.h	195;"	d
 K_RDCMDBYTE	include/kbdreg.h	194;"	d
 LD	Makefile	/^LD      := ld$/;"	m
+LD	user/Makefile	/^LD      = ld$/;"	m
+LDFLAGS	user/Makefile	/^LDFLAGS = -melf_i386$/;"	m
 LD_SCRIPT	Makefile	/^LD_SCRIPT := $(shell find $(KERNEL_DIR) -name "*.ld")$/;"	m
 LIB_C	Makefile	/^LIB_C := $(wildcard $(LIB_DIR)\/*.c)$/;"	m
 LIB_DIR	Makefile	/^LIB_DIR        := lib$/;"	m
 LIB_O	Makefile	/^LIB_O := $(LIB_C:%.c=$(OBJ_DIR)\/%.o)$/;"	m
+ListHead	include/list.h	/^struct ListHead {$/;"	s
+ListHead	include/list.h	/^typedef struct ListHead ListHead;$/;"	t	typeref:struct:ListHead
 MAX	include/types.h	49;"	d
 MAXERROR	lib/printfmt.c	/^	MAXERROR$/;"	e	enum:__anon3	file:
 MAXMEM	include/mmu.h	10;"	d
@@ -233,17 +244,27 @@ MIN	include/types.h	43;"	d
 NR_IRQ	include/x86.h	7;"	d
 NR_SEGMENTS	include/mmu.h	82;"	d
 NR_SEG_NODES	kernel/memory/heap.c	5;"	d	file:
+NSYSCALLS	user/lib.h	/^	NSYSCALLS$/;"	e	enum:__anon4
 NULL	include/stdio.h	7;"	d
 NULL	include/types.h	5;"	d
+NULL	user/const.h	7;"	d
 OBJCOPY	Makefile	/^OBJCOPY := objcopy$/;"	m
+OBJS	user/Makefile	/^OBJS    = $(CFILES:.c=.o)$/;"	m
 OBJ_BOOT_DIR	Makefile	/^OBJ_BOOT_DIR   := $(OBJ_DIR)\/$(BOOT_DIR)$/;"	m
 OBJ_DIR	Makefile	/^OBJ_DIR        := obj$/;"	m
 OBJ_KERNEL_DIR	Makefile	/^OBJ_KERNEL_DIR := $(OBJ_DIR)\/$(KERNEL_DIR)$/;"	m
 OBJ_LIB_DIR	Makefile	/^OBJ_LIB_DIR    := $(OBJ_DIR)\/$(LIB_DIR)$/;"	m
 PARTIAL_UPDATE	kernel/device/video.c	13;"	d	file:
+PCB	include/process.h	/^typedef struct PCB$/;"	s
+PCB	include/process.h	/^}PCB;$/;"	t	typeref:struct:PCB
+PCBPool_init	kernel/process/process.c	/^void PCBPool_init()$/;"	f
+PCB_Pool_NUM	include/process.h	15;"	d
+PG_ALIGN	include/process.h	/^PCB PCBPool[PCB_Pool_NUM] PG_ALIGN;$/;"	v
+PG_ALIGN	include/process.h	22;"	d
 PORT_PIC_MASTER	kernel/irq/i8259.c	4;"	d	file:
 PORT_PIC_SLAVE	kernel/irq/i8259.c	5;"	d	file:
 PT_LOAD	include/elf.h	5;"	d
+PT_LOAD	kernel/process/process.c	16;"	d	file:
 ProgramHeader	boot/boot.h	/^struct ProgramHeader {$/;"	s
 ProgramHeader	include/elf.h	/^typedef struct ProgramHeader {$/;"	s
 ProgramHeader	include/elf.h	/^}ProgramHeader;$/;"	t	typeref:struct:ProgramHeader
@@ -325,10 +346,11 @@ ROUNDUP	include/types.h	64;"	d
 SCR_HEIGHT	include/video.h	8;"	d
 SCR_SIZE	include/video.h	9;"	d
 SCR_WIDTH	include/video.h	7;"	d
+SECTORS_SIZE	kernel/process/process.c	12;"	d	file:
 SECTSIZE	boot/main.c	11;"	d	file:
+SEG	include/mmu.h	/^SEG(SegDesc *ptr, uint32_t type,uint32_t base, uint32_t limit, uint32_t dpl){$/;"	f
 SEG	include/mmu.h	104;"	d
-SEG	include/mmu.h	151;"	d
-SEG16	include/mmu.h	155;"	d
+SEG16	include/mmu.h	/^SEG16(SegDesc *ptr, uint32_t type,uint32_t base, uint32_t limit, uint32_t dpl){$/;"	f
 SEG_ASM	boot/asm.h	9;"	d
 SEG_EXECUTABLE	include/mmu.h	76;"	d
 SEG_EXE_CODE	include/mmu.h	78;"	d
@@ -347,42 +369,70 @@ SEG_WRITABLE	include/mmu.h	74;"	d
 SELECTOR_KERNEL	include/mmu.h	91;"	d
 SELECTOR_USER	include/mmu.h	92;"	d
 SERIAL_PORT	kernel/device/serial.c	3;"	d	file:
-SETCALLGATE	include/mmu.h	293;"	d
-SETGATE	include/mmu.h	279;"	d
+SETCALLGATE	include/mmu.h	329;"	d
+SETGATE	include/mmu.h	315;"	d
 SLOW	kernel/device/video.c	10;"	d	file:
-STA_A	include/mmu.h	168;"	d
-STA_C	include/mmu.h	165;"	d
-STA_E	include/mmu.h	164;"	d
-STA_R	include/mmu.h	167;"	d
-STA_W	include/mmu.h	166;"	d
-STA_X	include/mmu.h	163;"	d
-STS_CG16	include/mmu.h	174;"	d
-STS_CG32	include/mmu.h	180;"	d
-STS_IG16	include/mmu.h	176;"	d
-STS_IG32	include/mmu.h	181;"	d
-STS_LDT	include/mmu.h	172;"	d
-STS_T16A	include/mmu.h	171;"	d
-STS_T16B	include/mmu.h	173;"	d
-STS_T32A	include/mmu.h	178;"	d
-STS_T32B	include/mmu.h	179;"	d
-STS_TG	include/mmu.h	175;"	d
-STS_TG16	include/mmu.h	177;"	d
-STS_TG32	include/mmu.h	182;"	d
+STA_A	include/mmu.h	204;"	d
+STA_C	include/mmu.h	201;"	d
+STA_E	include/mmu.h	200;"	d
+STA_R	include/mmu.h	203;"	d
+STA_W	include/mmu.h	202;"	d
+STA_X	include/mmu.h	199;"	d
+STK_SZ	include/process.h	13;"	d
+STS_CG16	include/mmu.h	210;"	d
+STS_CG32	include/mmu.h	216;"	d
+STS_IG16	include/mmu.h	212;"	d
+STS_IG32	include/mmu.h	217;"	d
+STS_LDT	include/mmu.h	208;"	d
+STS_T16A	include/mmu.h	207;"	d
+STS_T16B	include/mmu.h	209;"	d
+STS_T32A	include/mmu.h	214;"	d
+STS_T32B	include/mmu.h	215;"	d
+STS_TG	include/mmu.h	211;"	d
+STS_TG16	include/mmu.h	213;"	d
+STS_TG32	include/mmu.h	218;"	d
+SYS_cgetc	user/lib.h	/^	SYS_cgetc,$/;"	e	enum:__anon4
+SYS_cputs	user/lib.h	/^	SYS_cputs = 0,$/;"	e	enum:__anon4
+SYS_env_destroy	user/lib.h	/^	SYS_env_destroy,$/;"	e	enum:__anon4
+SYS_env_set_pgfault	user/lib.h	/^	SYS_env_set_pgfault,$/;"	e	enum:__anon4
+SYS_env_set_status	user/lib.h	/^	SYS_env_set_status,$/;"	e	enum:__anon4
+SYS_exofork	user/lib.h	/^	SYS_exofork,$/;"	e	enum:__anon4
+SYS_getenvid	user/lib.h	/^	SYS_getenvid,$/;"	e	enum:__anon4
+SYS_ipc_recv	user/lib.h	/^	SYS_ipc_recv,$/;"	e	enum:__anon4
+SYS_ipc_try_send	user/lib.h	/^	SYS_ipc_try_send,$/;"	e	enum:__anon4
+SYS_page_alloc	user/lib.h	/^	SYS_page_alloc,$/;"	e	enum:__anon4
+SYS_page_map	user/lib.h	/^	SYS_page_map,$/;"	e	enum:__anon4
+SYS_page_unmap	user/lib.h	/^	SYS_page_unmap,$/;"	e	enum:__anon4
+SYS_yield	user/lib.h	/^	SYS_yield,$/;"	e	enum:__anon4
 SegDesc	include/mmu.h	/^} SegDesc;$/;"	t	typeref:struct:SegmentDescriptor
 SegmentDescriptor	include/mmu.h	/^typedef struct SegmentDescriptor {$/;"	s
+TASK_INTERRUPTIBLE	include/process.h	19;"	d
+TASK_READY	include/process.h	18;"	d
+TASK_RUNNING	include/process.h	17;"	d
+TASK_STOPPED	include/process.h	21;"	d
+TASK_UNINTERRUPTIBLE	include/process.h	20;"	d
 TIMER_PORT	kernel/device/timer.c	7;"	d	file:
 TRAP_GATE_32	kernel/irq/idt.c	4;"	d	file:
+TRUE	user/const.h	4;"	d
 TSS	include/mmu.h	/^}TSS;$/;"	t	typeref:struct:__anon2
+T_SYSCALL	user/syscall.c	6;"	d	file:
 Taskstate	include/mmu.h	/^struct Taskstate {$/;"	s
 TrapFrame	include/mmu.h	/^struct TrapFrame {$/;"	s
 USER_STACK_SIZE	include/mmu.h	12;"	d
+USTACKTOP	kernel/process/process.c	13;"	d	file:
+UTrapFrame_init	kernel/process/process.c	/^void UTrapFrame_init(TrapFrame *tf)$/;"	f
 VMEM_ADDR	include/video.h	10;"	d
+_LIB_H_	user/lib.h	2;"	d
+__CONST_H__	user/const.h	2;"	d
 __DEVICE_H__	include/device.h	2;"	d
 __ELF_H__	include/elf.h	2;"	d
 __GAME_H__	include/game.h	2;"	d
 __I8259_H__	include/i8259.h	2;"	d
 __IRQ_H__	include/irq.h	2;"	d
+__LIST_H__	include/list.h	2;"	d
+__PROCESS_H__	include/process.h	2;"	d
 __SEGNODE_H__	include/segNode.h	2;"	d
+__TYPES_H__	user/types.h	2;"	d
 __VIDEO_H__	include/video.h	2;"	d
 _panic	kernel/assert.c	/^_panic(const char *file, int line, const char *fmt,...)$/;"	f
 _warn	kernel/assert.c	/^_warn(const char *file, int line, const char *fmt,...)$/;"	f
@@ -394,13 +444,17 @@ assert	include/assert.h	14;"	d
 base_15_0	include/mmu.h	/^	uint32_t base_15_0           : 16;$/;"	m	struct:SegmentDescriptor
 base_23_16	include/mmu.h	/^	uint32_t base_23_16          : 8;$/;"	m	struct:SegmentDescriptor
 base_31_24	include/mmu.h	/^	uint32_t base_31_24          : 8;$/;"	m	struct:SegmentDescriptor
+block	kernel/process/process.c	/^static ListHead ready,block,free;$/;"	v	file:
 blue_screen	kernel/device/video.c	/^blue_screen(){$/;"	f
 bool	include/types.h	/^typedef _Bool bool;$/;"	t
+boolean	user/types.h	/^typedef unsigned char  boolean;$/;"	t
 bootmain	boot/main.c	/^bootmain(void) {$/;"	f
 breakpoint	include/x86.h	/^breakpoint(void)$/;"	f
 buf	lib/printfmt.c	/^	char *buf;$/;"	m	struct:sprintbuf	file:
 cnt	lib/printfmt.c	/^	int cnt;$/;"	m	struct:sprintbuf	file:
 cpuid	include/x86.h	/^cpuid(uint32_t info, uint32_t *eaxp, uint32_t *ebxp, uint32_t *ecxp, uint32_t *edxp)$/;"	f
+cputs	user/syscall.c	/^int cputs(const char *s,uint32_t len)$/;"	f
+current	include/process.h	/^PCB *current ;$/;"	v
 disable_interrupt	include/x86.h	/^disable_interrupt(void){$/;"	f
 display_buffer	kernel/device/video.c	/^display_buffer(void) {$/;"	f
 do_keyboard	kernel/device/keyboard.c	/^void do_keyboard(int code){$/;"	f
@@ -421,6 +475,7 @@ ehsize	include/elf.h	/^	unsigned short ehsize;$/;"	m	struct:ELFHeader
 elf	boot/boot.h	/^	unsigned char  elf[12];$/;"	m	struct:ELFHeader
 elf	include/elf.h	/^	unsigned char  elf[12];$/;"	m	struct:ELFHeader
 enable_interrupt	include/x86.h	/^enable_interrupt(void){$/;"	f
+enter_process_userspace	kernel/process/process.c	/^int enter_process_userspace(void)$/;"	f
 entry	boot/boot.h	/^	unsigned int   entry;$/;"	m	struct:ELFHeader
 entry	include/elf.h	/^	unsigned int   entry;$/;"	m	struct:ELFHeader
 error_string	lib/printfmt.c	/^static const char * const error_string[MAXERROR] =$/;"	v	file:
@@ -433,6 +488,7 @@ flags	boot/boot.h	/^	unsigned int   flags;$/;"	m	struct:ELFHeader
 flags	boot/boot.h	/^	unsigned int flags;$/;"	m	struct:ProgramHeader
 flags	include/elf.h	/^	unsigned int   flags;$/;"	m	struct:ELFHeader
 flags	include/elf.h	/^	unsigned int flags;$/;"	m	struct:ProgramHeader
+free	kernel/process/process.c	/^static ListHead ready,block,free;$/;"	v	file:
 gdt	boot/start.S	/^gdt:$/;"	l
 gdt	kernel/memory/kvm.c	/^static SegDesc gdt[NR_SEGMENTS];$/;"	v	file:
 gdtdesc	boot/start.S	/^gdtdesc:                           # GDT描述符$/;"	l
@@ -458,15 +514,19 @@ insb	include/x86.h	/^insb(int port, void *addr, int cnt)$/;"	f
 insl	include/x86.h	/^insl(int port, void *addr, int cnt)$/;"	f
 insw	include/x86.h	/^insw(int port, void *addr, int cnt)$/;"	f
 int16_t	include/types.h	/^typedef short int16_t;$/;"	t
+int16_t	user/types.h	/^typedef          short int16_t;$/;"	t
 int32_t	include/types.h	/^typedef int int32_t;$/;"	t
+int32_t	user/types.h	/^typedef          int   int32_t;$/;"	t
 int64_t	include/types.h	/^typedef long long int64_t;$/;"	t
 int8_t	include/types.h	/^typedef __signed char int8_t;$/;"	t
+int8_t	user/types.h	/^typedef          char  int8_t;$/;"	t
 intptr_t	include/types.h	/^typedef int32_t intptr_t;$/;"	t
 invlpg	include/x86.h	/^invlpg(void *addr)$/;"	f
 inw	include/x86.h	/^inw(int port)$/;"	f
 irq	include/mmu.h	/^	int32_t irq;$/;"	m	struct:TrapFrame
 irq_handle	kernel/irq/irq_handle.c	/^irq_handle(struct TrapFrame *tf) {$/;"	f
 kb_dreg	kernel/device/keyboard.c	/^int kb_dreg;$/;"	v
+kstack	include/process.h	/^	uint8_t kstack[KSTACK_SIZE];$/;"	m	struct:PCB
 lcr0	include/x86.h	/^lcr0(uint32_t val)$/;"	f
 lcr3	include/x86.h	/^lcr3(uint32_t val)$/;"	f
 lcr4	include/x86.h	/^lcr4(uint32_t val)$/;"	f
@@ -475,6 +535,15 @@ lidt	include/x86.h	/^lidt(void *p)$/;"	f
 limit_15_0	include/mmu.h	/^	uint32_t limit_15_0          : 16;$/;"	m	struct:SegmentDescriptor
 limit_19_16	include/mmu.h	/^	uint32_t limit_19_16         : 4;$/;"	m	struct:SegmentDescriptor
 link	include/mmu.h	/^	uint32_t link;         \/\/ old ts selector$/;"	m	struct:__anon2
+list	include/process.h	/^	ListHead list;$/;"	m	struct:PCB
+list_add	include/list.h	/^list_add(ListHead *prev, ListHead *next, ListHead *data) {$/;"	f
+list_add_after	include/list.h	/^list_add_after(ListHead *list, ListHead *data) {$/;"	f
+list_add_before	include/list.h	/^list_add_before(ListHead *list, ListHead *data) {$/;"	f
+list_del	include/list.h	/^list_del(ListHead *data) {$/;"	f
+list_empty	include/list.h	/^list_empty(ListHead *list) {$/;"	f
+list_entry	include/list.h	11;"	d
+list_foreach	include/list.h	52;"	d
+list_init	include/list.h	/^list_init(ListHead *list) {$/;"	f
 lldt	include/x86.h	/^lldt(uint16_t sel)$/;"	f
 log2	include/stdio.h	24;"	d
 ltr	include/x86.h	/^ltr(uint16_t sel)$/;"	f
@@ -483,6 +552,7 @@ machine	include/elf.h	/^	unsigned short machine;$/;"	m	struct:ELFHeader
 magic	boot/boot.h	/^	unsigned int   magic;$/;"	m	struct:ELFHeader
 magic	include/elf.h	/^	unsigned int   magic;$/;"	m	struct:ELFHeader
 main	kernel/main.c	/^int main(){$/;"	f
+main	user/usr.c	/^int main(void)$/;"	f
 main_loop	kernel/game/game.c	/^void main_loop(){$/;"	f
 memcmp	lib/string.c	/^memcmp(const void *v1, const void *v2, size_t n)$/;"	f
 memcpy	lib/string.c	/^memcpy(void *dst, const void *src, size_t n)$/;"	f
@@ -491,6 +561,8 @@ memmove	lib/string.c	/^memmove(void *dst, const void *src, size_t n)$/;"	f
 memset	lib/string.c	/^memset(void *v, int c, size_t n)$/;"	f
 memsz	boot/boot.h	/^	unsigned int memsz;$/;"	m	struct:ProgramHeader
 memsz	include/elf.h	/^	unsigned int memsz;$/;"	m	struct:ProgramHeader
+new_PCB	kernel/process/process.c	/^PCB *new_PCB()$/;"	f
+next	include/list.h	/^	struct ListHead *prev, *next;$/;"	m	struct:ListHead	typeref:struct:ListHead::
 off	boot/boot.h	/^	unsigned int off;$/;"	m	struct:ProgramHeader
 off	include/elf.h	/^	unsigned int off;$/;"	m	struct:ProgramHeader
 off_t	include/types.h	/^typedef int32_t off_t;$/;"	t
@@ -511,8 +583,11 @@ paddr	boot/boot.h	/^	unsigned int paddr;$/;"	m	struct:ProgramHeader
 paddr	include/elf.h	/^	unsigned int paddr;$/;"	m	struct:ProgramHeader
 panic	include/assert.h	12;"	d
 panicstr	kernel/assert.c	/^const char *panicstr;$/;"	v
+pcb_of_idle	include/process.h	/^PCB *pcb_of_idle ;$/;"	v
+pcb_pop_tf	kernel/process/process.c	/^void pcb_pop_tf(TrapFrame *tf)$/;"	f
 pd_base	include/mmu.h	/^	uint32_t pd_base;		\/\/ Base address$/;"	m	struct:Pseudodesc
 pd_lim	include/mmu.h	/^	uint16_t pd_lim;		\/\/ Limit$/;"	m	struct:Pseudodesc
+pgdir	include/process.h	/^	PDE *pgdir;$/;"	m	struct:PCB
 phentsize	boot/boot.h	/^	unsigned short phentsize;$/;"	m	struct:ELFHeader
 phentsize	include/elf.h	/^	unsigned short phentsize;$/;"	m	struct:ELFHeader
 phnum	boot/boot.h	/^	unsigned short phnum;$/;"	m	struct:ELFHeader
@@ -520,15 +595,22 @@ phnum	include/elf.h	/^	unsigned short phnum;$/;"	m	struct:ELFHeader
 phoff	boot/boot.h	/^	unsigned int   phoff;$/;"	m	struct:ELFHeader
 phoff	include/elf.h	/^	unsigned int   phoff;$/;"	m	struct:ELFHeader
 physaddr_t	include/types.h	/^typedef uint32_t physaddr_t;$/;"	t
+pid_t	user/types.h	/^typedef int32_t  pid_t;$/;"	t
 ppn_t	include/types.h	/^typedef uint32_t ppn_t;$/;"	t
 prepare_buffer	kernel/device/video.c	/^prepare_buffer(void) {$/;"	f
 present	include/mmu.h	/^	uint32_t present             : 1;$/;"	m	struct:SegmentDescriptor
 present	include/mmu.h	/^	uint32_t present          : 1;\/\/Present$/;"	m	struct:GateDescriptor
+prev	include/list.h	/^	struct ListHead *prev, *next;$/;"	m	struct:ListHead	typeref:struct:ListHead::ListHead
+print_stack	kernel/process/process.c	/^void print_stack(TrapFrame *tf)$/;"	f
 printfmt	lib/printfmt.c	/^printfmt(void (*putch)(int, void*), void *putdat, const char *fmt, ...)$/;"	f
 printk	kernel/printk.c	/^int	printk(const char *fmt, ...){$/;"	f
 printnum	lib/printfmt.c	/^printnum(void (*putch)(int, void*), void *putdat,$/;"	f	file:
 privilege_level	include/mmu.h	/^	uint32_t privilege_level     : 2;$/;"	m	struct:SegmentDescriptor
 privilege_level	include/mmu.h	/^	uint32_t privilege_level  : 2;\/\/descriptor(meaning new)privilege$/;"	m	struct:GateDescriptor
+process_exec	kernel/process/process.c	/^void process_exec(PCB *pcb)$/;"	f
+process_fork	kernel/process/process.c	/^int process_fork(PCB **new_pcb)$/;"	f
+process_load	kernel/process/process.c	/^static void process_load(PCB *pcb)$/;"	f	file:
+process_setup_vm	kernel/process/process.c	/^static int process_setup_vm(PCB *pcb)$/;"	f	file:
 putch	kernel/printk.c	/^putch(int ch, void *cnt){$/;"	f	file:
 rcr0	include/x86.h	/^rcr0(void)$/;"	f
 rcr2	include/x86.h	/^rcr2(void)$/;"	f
@@ -539,10 +621,14 @@ read_eflags	include/x86.h	/^read_eflags(void)$/;"	f
 read_esp	include/x86.h	/^read_esp(void)$/;"	f
 read_tsc	include/x86.h	/^read_tsc(void)$/;"	f
 readsect	boot/main.c	/^readsect(void *dst, int offset) {$/;"	f
+readsect	kernel/process/disk_read.c	/^readsect(void *dst, int offset) {$/;"	f
 readseg	boot/main.c	/^readseg(unsigned char *pa, int count, int offset) {$/;"	f
+readseg	kernel/process/disk_read.c	/^readseg(unsigned char *pa, int count, int offset) {$/;"	f
+ready	kernel/process/process.c	/^static ListHead ready,block,free;$/;"	v	file:
 segment	include/mmu.h	/^	uint32_t segment          : 16;\/\/segment selector$/;"	m	struct:GateDescriptor
 segment_Node	include/segNode.h	/^struct segment_Node{$/;"	s
 segment_Node	include/segNode.h	/^typedef struct segment_Node segment_Node;$/;"	t	typeref:struct:segment_Node
+segment_alloc	kernel/process/process.c	/^static void segment_alloc(PCB *pcb,void *va , size_t len)$/;"	f	file:
 segment_buffer	kernel/memory/heap.c	/^segment_Node segment_buffer[NR_SEG_NODES];$/;"	v
 segment_malloc	kernel/memory/mmu.c	/^segment_malloc(ProgramHeader *ph, SegDesc *idt, int32_t count){$/;"	f
 segment_type	include/mmu.h	/^	uint32_t segment_type        : 1;$/;"	m	struct:SegmentDescriptor
@@ -565,6 +651,7 @@ shstrndx	boot/boot.h	/^	unsigned short shstrndx;$/;"	m	struct:ELFHeader
 shstrndx	include/elf.h	/^	unsigned short shstrndx;$/;"	m	struct:ELFHeader
 size	include/segNode.h	/^	uint32_t size;\/\/the size of this segment$/;"	m	struct:segment_Node
 size_t	include/types.h	/^typedef uint32_t size_t;$/;"	t
+size_t	user/types.h	/^typedef uint32_t size_t;$/;"	t
 snprintf	lib/printfmt.c	/^snprintf(char *buf, int n, const char *fmt, ...)$/;"	f
 soft_use	include/mmu.h	/^	uint32_t soft_use            : 1;$/;"	m	struct:SegmentDescriptor
 sprintbuf	lib/printfmt.c	/^struct sprintbuf {$/;"	s	file:
@@ -575,6 +662,7 @@ stack_malloc	kernel/memory/mmu.c	/^void stack_malloc(SegDesc *idt, int32_t count
 start	boot/start.S	/^start:$/;"	l
 start	include/segNode.h	/^	uint32_t start;\/\/The starting point$/;"	m	struct:segment_Node
 start32	boot/start.S	/^start32:$/;"	l
+state	include/process.h	/^	int state;$/;"	m	struct:PCB
 static_assert	include/assert.h	18;"	d
 strcat	lib/string.c	/^strcat(char *dst, const char *src)$/;"	f
 strchr	lib/string.c	/^strchr(const char *s, char c)$/;"	f
@@ -587,7 +675,10 @@ strncmp	lib/string.c	/^strncmp(const char *p, const char *q, size_t n)$/;"	f
 strncpy	lib/string.c	/^strncpy(char *dst, const char *src, size_t size) {$/;"	f
 strnlen	lib/string.c	/^strnlen(const char *s, size_t size)$/;"	f
 strtol	lib/string.c	/^strtol(const char *s, char **endptr, int base)$/;"	f
+sys_cputs	user/syscall.c	/^int sys_cputs(const char *s,uint32_t len)$/;"	f
+syscall	user/syscall.c	/^static inline int32_t syscall(int num, int check, uint32_t a1,uint32_t a2,uint32_t a3, uint32_t a4, uint32_t a5)$/;"	f	file:
 system	include/mmu.h	/^	uint32_t system           : 1;\/\/must be 0(system)$/;"	m	struct:GateDescriptor
+tf	include/process.h	/^	void *tf;$/;"	m	struct:PCB
 tlbflush	include/x86.h	/^tlbflush(void)$/;"	f
 true	include/types.h	/^enum { false, true };$/;"	e	enum:__anon1
 ts_cr3	include/mmu.h	/^	physaddr_t ts_cr3;	\/\/ Page directory base$/;"	m	struct:Taskstate
@@ -635,9 +726,12 @@ type	include/elf.h	/^	unsigned short type;$/;"	m	struct:ELFHeader
 type	include/mmu.h	/^	uint32_t type                : 4;$/;"	m	struct:SegmentDescriptor
 type	include/mmu.h	/^	uint32_t type             : 4;\/\/type(STS_{TG,IG32,TG32})$/;"	m	struct:GateDescriptor
 uint16_t	include/types.h	/^typedef unsigned short uint16_t;$/;"	t
+uint16_t	user/types.h	/^typedef unsigned short uint16_t;$/;"	t
 uint32_t	include/types.h	/^typedef unsigned int uint32_t;$/;"	t
+uint32_t	user/types.h	/^typedef unsigned int   uint32_t;$/;"	t
 uint64_t	include/types.h	/^typedef unsigned long long uint64_t;$/;"	t
 uint8_t	include/types.h	/^typedef unsigned char uint8_t;$/;"	t
+uint8_t	user/types.h	/^typedef unsigned char  uint8_t;$/;"	t
 uintptr_t	include/types.h	/^typedef uint32_t uintptr_t;$/;"	t
 unused	kernel/device/keyboard.c	/^uint8_t unused = false;\/\/keyboard state untrack$/;"	v
 va_arg	include/stdarg.h	9;"	d
@@ -655,6 +749,7 @@ vprintk	kernel/printk.c	/^int	vprintk(const char *fmt,va_list ap){ $/;"	f
 vref	kernel/device/video.c	/^static uint8_t vref[SCR_SIZE];$/;"	v	file:
 vsnprintf	lib/printfmt.c	/^vsnprintf(char *buf, int n, const char *fmt, va_list ap)$/;"	f
 waitdisk	boot/main.c	/^waitdisk(void) {$/;"	f
+waitdisk	kernel/process/disk_read.c	/^waitdisk(void) {$/;"	f
 warn	include/assert.h	11;"	d
 write_eflags	include/x86.h	/^write_eflags(uint32_t eflags)$/;"	f
 write_gdt	include/x86.h	/^write_gdt(void *addr, uint32_t size){$/;"	f

@@ -9,7 +9,7 @@
 
 #define MAXMEM			0x8000000
 #define KERNEL_SIZE		0x400000
-#define USER_STACK_SIZE	0x4096
+#define USER_STACK_SIZE	4096
 
 
 
@@ -78,13 +78,12 @@
 #define SEG_EXE_CODE			0xa	//READABLE|EXECUTABLE
 
 
-//use in page mode, maybe can be drop
-#define NR_SEGMENTS             3
+#define NR_SEGMENTS             512
 #define SEG_KERNEL_CODE         1 
 #define SEG_KERNEL_DATA         2
-#define SEG_USER_CODE			3
-#define SEG_USER_DATA			4
-#define SEG_TSS					5
+//#define SEG_USER_CODE			3
+//#define SEG_USER_DATA			4
+#define SEG_TSS					3
 
 
 //construct the selector for kernel or user
@@ -291,12 +290,30 @@ struct GateDescriptor {
 };
 
 
-
+/*
 struct TrapFrame {
 	uint32_t edi, esi, ebp, xxx, ebx, edx, ecx, eax;
 	int32_t irq;
 };
+*/
 
+struct TrapFrame {
+	uint32_t edi, esi, ebp, esp_;
+	uint32_t ebx, edx, ecx, eax;   // Register saved by pushal
+	uint32_t gs,fs,es,ds;   // Segment register
+
+	uint32_t err;
+	uint32_t eip;
+	uint16_t cs;
+	uint16_t padding3;
+	uint32_t eflags; // Execution state before trap 
+	uint32_t esp; 
+	uint16_t ss;
+	uint16_t padding4;
+}__attribute__((packed));
+
+
+//typedef struct TrapFrame TrapFrame;
 
 // Set up a normal interrupt/trap gate descriptor.
 // - istrap: 1 for a trap (= exception) gate, 0 for an interrupt gate.
