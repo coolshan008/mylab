@@ -12,6 +12,7 @@
  * |_|____/ \___/ \___/  |_|  |_|\__,_|_| |_|\__,_|\__,_|_|
  */                                                               
 
+void init_segment_nodes();
 
 static uint8_t active[NR_SEGMENTS];
 
@@ -46,6 +47,10 @@ set_tss(SegDesc *ptr) {
 }*/
 void set_tss_esp0(uint32_t esp) {
 	tss.esp0 = esp;
+}
+
+void set_tss_ss0(uint32_t ss){
+	tss.ss0=ss;
 }
 //static may be drop
 
@@ -82,6 +87,7 @@ new_segment(uint32_t type, uint32_t base, uint32_t limit, uint32_t dpl){
 		if(active[i]==false){
 			SEG(&(gdt[i]),type,base,limit,dpl);
 			active[i]=true;
+			printk("index of gdt = %d in %s\n",i,__FUNCTION__);
 			return i;//return the index of gdt
 		}
 	}
@@ -103,6 +109,7 @@ init_segment(void) {
 	write_gdt(gdt, sizeof(gdt));
 
 	set_tss(&gdt[SEG_TSS]);
+	set_tss_ss0(SELECTOR_KERNEL(SEG_KERNEL_DATA));
 	write_tr( SELECTOR_USER(SEG_TSS) );
 }
 

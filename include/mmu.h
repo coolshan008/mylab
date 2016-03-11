@@ -9,7 +9,9 @@
 
 #define MAXMEM			0x8000000
 #define KERNEL_SIZE		0x400000
-#define USER_STACK_SIZE	4096
+#define USER_SIZE		0x100000
+#define USER_STACK_TOP	0x0fffff
+#define USER_STACK_SIZE 0x100000
 
 
 
@@ -367,5 +369,7 @@ struct Pseudodesc {
 } __attribute__ ((packed));
 
 #endif /* !__ASSEMBLER__ */
+
+
 
 #endif /* !JOS_INC_MMU_H */

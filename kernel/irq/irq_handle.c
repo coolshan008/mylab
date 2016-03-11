@@ -4,6 +4,11 @@
 #include "include/syscall.h"
 //#include "game.h"
 
+/*
+ * 切换上下文应该注意改tss的ss0 和esp0
+ */
+
+
 static void (*do_timer)(void);
 static void (*do_keyboard)(int);
 
@@ -23,6 +28,7 @@ void print_stack(TrapFrame *tf);
  * 请仔细理解这段程序的含义，这些内容将在后续的实验中被反复使用。 */
 void
 irq_handle(struct TrapFrame *tf) {
+	//print_stack(tf);
 	if(tf->irq < 1000) {
 		if(tf->irq == -1) {
 			printk("%s, %d: Unhandled exception!\n", __FUNCTION__, __LINE__);
@@ -38,7 +44,7 @@ irq_handle(struct TrapFrame *tf) {
 	}
 
 	else if (tf->irq == 1000) {
-		//printk("timer\n");
+		printk("timer\n");
 		do_timer();
 		//print_stack(tf);
 	}

@@ -10,22 +10,21 @@
  */ 
 
 
-/*
-   SECTORS_SIZE 与USTACKTOP需要你们自己确定大小
- */
 #define SECTORS_SIZE 512
 #define USTACKTOP 4095
 #define ELF_MAGIC 0x464C457FU
 #define ELF_PROG_LOAD 1
 #define PT_LOAD 1
 
-#define USER_OFFSET 67072
+#define USER_OFFSET 102400
 //此函数可用于测试
 
 void set_tss_esp0(uint32_t esp);
+void set_tss_ss0(uint32_t ss);
 static ListHead ready,block,free;
 void readseg(unsigned char *pa, int count, int offset);
-uint32_t segment_malloc(ProgramHeader *, TrapFrame *, int32_t *);
+//uint32_t segment_malloc(ProgramHeader *, TrapFrame *, int32_t *);
+uint32_t segment_malloc(ProgramHeader *, TrapFrame *);
 void stack_malloc(TrapFrame *, int32_t *);
 
 void print_stack(TrapFrame *tf)
@@ -142,8 +141,8 @@ int process_fork(PCB **new_pcb)
 //从内核空间到用户空间的返回
 void pcb_pop_tf(TrapFrame *tf)
 {	
-	//printk("pcb_pop_tf here is working! %s %d\n",__FILE__,__LINE__);
-	print_stack(tf);
+	printk("pcb_pop_tf here is working! %s %d\n",__FILE__,__LINE__);
+	//print_stack(tf);
 
 
 
@@ -170,49 +169,12 @@ void process_exec(PCB *pcb)
 	 * 加载新的idt
 	   让用户程序运行起来，核心是加载相应的页目录和进入ring3环境
 	 */
-//	printk("pcb->pgdir=0x%x\n",(uint32_t)(pcb->pgdir));
-	//set_cr3((void *)va_to_pa(pcb->pgdir));
 	set_tss_esp0((uint32_t)((pcb->kstack)+KSTACK_SIZE));//设置esp0为该进程内核栈顶
-	printk("process_exec is here working %s %d",__FILE__,__LINE__);
+	printk("process_exec is here working %s %d\n",__FILE__,__LINE__);
 	pcb_pop_tf((TrapFrame *)(pcb->tf));
-	printk("process_exec is here working %s %d",__FILE__,__LINE__);
+	printk("process_exec is working with fault%s %d\n",__FILE__,__LINE__);
 }
 
-//Alloc len bytes from the address va
-//从虚拟地址va开始分配len字节长度的空间
-/*static void segment_alloc(PCB *pcb,void *va , size_t len)
-{
-	int i;
-	Page *page;
-
-	va =(void *)(PGROUNDDOWN(((long)(va))));
-	printk("segment_alloc is here working!va = 0x%x %s %d\n",va,\
-			__FILE__,__LINE__);
-	for(i = 0;i < PGROUNDUP(len)/PG_SIZE;i++)
-	{
-		if(page_alloc(&page,GFP_USER) != 0)
-		{
-			printk("Segment_alloc page_alloc failed! %S %d\n",\
-					__FILE__,__LINE__);
-			return;
-		}
-
-		printk("segment_alloc page_alloc here working! %s %d\n",\
-			__FILE__,__LINE__);
-		if(page_insert(pcb->pgdir,page,va + i*PG_SIZE,PTE_U | PTE_W) != 0)
-		{
-			printk("Segment_alloc page_insert failed! %S %d\n",\
-					__FILE__,__LINE__);
-			return;
-		}
-		printk("segment_alloc page_insert here working! %s %d\n",\
-			__FILE__,__LINE__);
-	}
-
-	printk("segment_alloc is here working! %s %d\n",__FILE__,__LINE__);
-	return;
-}
-*/
 
 //将用户进程的二进制文件直接从磁盘上加载到物理内存上
 static void process_load(PCB *pcb)
@@ -221,26 +183,29 @@ static void process_load(PCB *pcb)
 	struct ProgramHeader *ph;
 	int i;
 	uint8_t *j;
-	int32_t count;
+	//int32_t count;
 	uint32_t pa;
 
 	unsigned char buf[4096];
 	readseg(buf,4096,USER_OFFSET);
 	elf=(struct ELFHeader *)buf;
+	//printk("magic = %x\n",elf->magic);
+	assert(elf->magic == ELF_MAGIC);
 	ph=(ProgramHeader *)((uint32_t)elf+elf->phoff);
+	pa = segment_malloc(ph, (TrapFrame *)(pcb->tf));//获取段基址
 	//process_setup_vm(pcb);
 	for(i=0; i< elf->phnum; i++) {
 		if(ph->type==PT_LOAD){
-			pa = segment_malloc(ph, (TrapFrame *)(pcb->tf),&count);//获取段基址
-			readseg((unsigned char *)pa, ph->filesz, USER_OFFSET+ph->off); /* 读入数据 */
-			for (j = (uint8_t *)(pa + ph->filesz); (uint32_t)j < pa + ph->memsz; *j ++ = 0);
+			readseg((unsigned char *)(pa+ ph->vaddr), ph->filesz, USER_OFFSET+ph->off); /* 读入数据 */
+			for (j = (uint8_t *)(pa + ph->vaddr+ ph->filesz); (uint32_t)j < pa + ph->vaddr+ ph->memsz; *j ++ = 0);
 		}
 		ph++;
 	}
+	((TrapFrame *)(pcb->tf))->esp= USER_STACK_TOP;//stack top
 	((TrapFrame *)(pcb->tf))->eip=elf->entry;//eip initial
+	printk("eip = 0x%x  in %s\n",elf->entry,__FUNCTION__);
 	//segment_alloc(pcb,(void *)USTACKTOP,PG_SIZE);
-	stack_malloc((TrapFrame *)(pcb->tf), &count);
-
+	//stack_malloc((TrapFrame *)(pcb->tf), &count);
 	printk("process_load is here working! %s %d\n",	__FILE__,__LINE__);
 }
 
@@ -268,7 +233,7 @@ int enter_process_userspace(void)
 	//may wrong
 
 	process_exec(pcb);
-	printk("enter_process_userspace process_exec is working %s %d\n",\
+	printk("enter_process_userspace process_exec fail%s %d\n",\
 			__FILE__,__LINE__);
 
 	printk("enter_process_userspace is working %s %d \n",__FILE__,\

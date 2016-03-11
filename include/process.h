@@ -1,10 +1,8 @@
 #ifndef __PROCESS_H__
 #define __PROCESS_H__
 
-//#include "common.h"
 #include "include/x86.h"
 #include "include/list.h"
-//#include "include/disk_read.h"
 
 
 //#define STK_SZ  8192

@@ -14,11 +14,11 @@ print STDERR "Kernel binary file is $n bytes (max 102400)\n";
 
 $m = $n % (512);
 $s = 512 - $m;
-$p = 67072 - $n;
+$p = 102400 - $n;
 
 print STDERR "Kernel binary file size n = $n\n";
 print STDERR "Kernel binary file sectors num m = $m\n";
-print STDERR "Kernel binary file added 0 bytes s = $s\n";
+print STDERR "Kernel binary file added $p bytes s = $s\n";
 
 $buf .= "\0" x $p;
 

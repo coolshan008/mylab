@@ -40,6 +40,7 @@ OBJ_KERNEL_DIR := $(OBJ_DIR)/$(KERNEL_DIR)
 OBJ_USER_DIR   := $(OBJ_DIR)/$(USER_DIR)
 
 LD_SCRIPT := $(shell find $(KERNEL_DIR) -name "*.ld")
+USER_LD_SCRIPT :=$(shell find $(USER_DIR) -name "*.ld")
 
 LIB_C := $(wildcard $(LIB_DIR)/*.c)
 LIB_O := $(LIB_C:%.c=$(OBJ_DIR)/%.o)
@@ -64,7 +65,7 @@ $(IMAGE): $(BOOT) $(KERNEL) $(USER)
 	@$(DD) if=/dev/zero of=$(IMAGE) count=10000         > /dev/null # 准备磁盘文件
 	@$(DD) if=$(BOOT) of=$(IMAGE) conv=notrunc          > /dev/null # 填充 boot loader
 	@$(DD) if=$(KERNEL) of=$(IMAGE) seek=1 conv=notrunc > /dev/null # 填充 kernel, 跨过 mbr
-	@$(DD) if=$(USER) of=$(IMAGE) seek=2 conv=notrunc > /dev/null # >填充user
+	@$(DD) if=$(USER) of=$(IMAGE) seek=201 conv=notrunc > /dev/null # >填充user
 
 $(BOOT): $(BOOT_O)
 	$(LD) -e start -Ttext=0x7C00 -m elf_i386 -nostdlib -o $@.out $^
@@ -88,8 +89,9 @@ $(KERNEL): $(KERNEL_O) $(LIB_O)
 
 $(USER): $(USER_O) 
 	$(LD) -e main -Ttext=0x0 -m elf_i386 -nostdlib -o $@ $^
+	#$(LD) -m elf_i386 -T $(USER_LD_SCRIPT) -nostdlib -o $@ $^ 
 	#@rm $@.out
-	perl user/genuser.pl $@
+	#perl user/genuser.pl $@
 
 
 $(OBJ_LIB_DIR)/%.o : $(LIB_DIR)/%.c

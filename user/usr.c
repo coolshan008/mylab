@@ -1,6 +1,7 @@
 #include "user/lib.h"
 
 
+
 int main(void)
 {
    /*
@@ -8,7 +9,8 @@ int main(void)
 	系统调用的封装函数为cputs，在调用这个函数时，需要循环
 	调用，以保证程序一直在运行
    */
-	cputs("hello,world!!!~~~~~~~\n",25);
+	char ha[10]="hello";
+	cputs(ha,5);
 	while(1);
 	return 0;
 }

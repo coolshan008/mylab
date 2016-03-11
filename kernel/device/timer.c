@@ -10,7 +10,8 @@
 
 void
 do_timer(){
-	;//printk("haha\n");
+	for(int i=0;i<10;i++)
+		printk("haha\n");
 }
 
 

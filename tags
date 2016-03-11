@@ -37,8 +37,8 @@ DPL_KERNEL	include/mmu.h	70;"	d
 DPL_USER	include/mmu.h	71;"	d
 ELFHeader	boot/boot.h	/^struct ELFHeader {$/;"	s
 ELFHeader	include/elf.h	/^struct ELFHeader {$/;"	s
-ELF_MAGIC	kernel/process/process.c	18;"	d	file:
-ELF_PROG_LOAD	kernel/process/process.c	19;"	d	file:
+ELF_MAGIC	kernel/process/process.c	15;"	d	file:
+ELF_PROG_LOAD	kernel/process/process.c	16;"	d	file:
 E_BAD_ENV	lib/printfmt.c	/^	E_BAD_ENV	= 2,	\/\/ Environment doesn't exist or otherwise$/;"	e	enum:__anon4	file:
 E_FAULT	lib/printfmt.c	/^	E_FAULT		= 6,	\/\/ Memory fault$/;"	e	enum:__anon4	file:
 E_INVAL	lib/printfmt.c	/^	E_INVAL		= 3,	\/\/ Invalid parameter$/;"	e	enum:__anon4	file:
@@ -221,7 +221,7 @@ KEY_W	include/kbdreg.h	22;"	d
 KEY_X	include/kbdreg.h	50;"	d
 KEY_Y	include/kbdreg.h	26;"	d
 KEY_Z	include/kbdreg.h	49;"	d
-KSTACK_SIZE	include/process.h	11;"	d
+KSTACK_SIZE	include/process.h	9;"	d
 K_LDCMDBYTE	include/kbdreg.h	195;"	d
 K_RDCMDBYTE	include/kbdreg.h	194;"	d
 LD	Makefile	/^LD      := ld$/;"	m
@@ -253,10 +253,10 @@ PCB	include/process.h	/^typedef struct PCB$/;"	s
 PCB	include/process.h	/^}PCB;$/;"	t	typeref:struct:PCB
 PCBPool	include/process.h	/^PCB PCBPool[PCB_Pool_NUM];$/;"	v
 PCBPool_init	kernel/process/process.c	/^void PCBPool_init()$/;"	f
-PCB_Pool_NUM	include/process.h	12;"	d
+PCB_Pool_NUM	include/process.h	10;"	d
 PORT_PIC_MASTER	kernel/irq/i8259.c	4;"	d	file:
 PORT_PIC_SLAVE	kernel/irq/i8259.c	5;"	d	file:
-PT_LOAD	kernel/process/process.c	20;"	d	file:
+PT_LOAD	kernel/process/process.c	17;"	d	file:
 ProgramHeader	boot/boot.h	/^struct ProgramHeader {$/;"	s
 ProgramHeader	include/elf.h	/^typedef struct ProgramHeader {$/;"	s
 ProgramHeader	include/elf.h	/^}ProgramHeader;$/;"	t	typeref:struct:ProgramHeader
@@ -338,7 +338,7 @@ ROUNDUP	include/types.h	64;"	d
 SCR_HEIGHT	include/video.h	8;"	d
 SCR_SIZE	include/video.h	9;"	d
 SCR_WIDTH	include/video.h	7;"	d
-SECTORS_SIZE	kernel/process/process.c	16;"	d	file:
+SECTORS_SIZE	kernel/process/process.c	13;"	d	file:
 SECTSIZE	boot/main.c	11;"	d	file:
 SECTSIZE	kernel/process/disk_read.c	3;"	d	file:
 SEG	include/mmu.h	/^SEG(SegDesc *ptr, uint32_t type,uint32_t base, uint32_t limit, uint32_t dpl){$/;"	f
@@ -411,11 +411,11 @@ SYS_yield	kernel/irq/syscall.c	/^	SYS_yield,$/;"	e	enum:__anon3	file:
 SYS_yield	user/lib.h	/^	SYS_yield,$/;"	e	enum:__anon5
 SegDesc	include/mmu.h	/^} SegDesc;$/;"	t	typeref:struct:SegmentDescriptor
 SegmentDescriptor	include/mmu.h	/^typedef struct SegmentDescriptor {$/;"	s
-TASK_INTERRUPTIBLE	include/process.h	16;"	d
-TASK_READY	include/process.h	15;"	d
-TASK_RUNNING	include/process.h	14;"	d
-TASK_STOPPED	include/process.h	18;"	d
-TASK_UNINTERRUPTIBLE	include/process.h	17;"	d
+TASK_INTERRUPTIBLE	include/process.h	14;"	d
+TASK_READY	include/process.h	13;"	d
+TASK_RUNNING	include/process.h	12;"	d
+TASK_STOPPED	include/process.h	16;"	d
+TASK_UNINTERRUPTIBLE	include/process.h	15;"	d
 TIMER_PORT	kernel/device/timer.c	7;"	d	file:
 TRAP_GATE_32	kernel/irq/idt.c	4;"	d	file:
 TSS	include/mmu.h	/^}TSS;$/;"	t	typeref:struct:__anon2
@@ -426,11 +426,12 @@ TrapFrame	include/mmu.h	/^typedef struct TrapFrame TrapFrame;$/;"	t	typeref:stru
 USER	Makefile	/^USER   := user.bin$/;"	m
 USER_C	Makefile	/^USER_C := $(shell find $(USER_DIR) -name "*.c")$/;"	m
 USER_DIR	Makefile	/^USER_DIR       := user$/;"	m
+USER_LD_SCRIPT	Makefile	/^USER_LD_SCRIPT :=$(shell find $(USER_DIR) -name "*.ld")$/;"	m
 USER_O	Makefile	/^USER_O := $(USER_C:%.c=$(OBJ_DIR)\/%.o)$/;"	m
-USER_OFFSET	kernel/process/process.c	22;"	d	file:
+USER_OFFSET	kernel/process/process.c	19;"	d	file:
 USER_S	Makefile	/^USER_S := $(shell find $(USER_DIR) -name "*.S")$/;"	m
 USER_STACK_SIZE	include/mmu.h	12;"	d
-USTACKTOP	kernel/process/process.c	17;"	d	file:
+USTACKTOP	kernel/process/process.c	14;"	d	file:
 UTrapFrame_init	kernel/process/process.c	/^void UTrapFrame_init(TrapFrame *tf)$/;"	f
 VMEM_ADDR	include/video.h	10;"	d
 _LIB_H_	user/lib.h	2;"	d
@@ -440,6 +441,7 @@ __ELF_H__	include/elf.h	2;"	d
 __GAME_H__	include/game.h	2;"	d
 __I8259_H__	include/i8259.h	2;"	d
 __IRQ_H__	include/irq.h	2;"	d
+__KVM_H__	include/kvm.h	2;"	d
 __LIST_H__	include/list.h	2;"	d
 __PROCESS_H__	include/process.h	2;"	d
 __SEGNODE_H__	include/segNode.h	2;"	d
@@ -528,6 +530,7 @@ init_idt	kernel/irq/idt.c	/^void init_idt() {$/;"	f
 init_intr	kernel/irq/i8259.c	/^init_intr(void) {$/;"	f
 init_keyboard	kernel/device/keyboard.c	/^void init_keyboard(){$/;"	f
 init_mmu	kernel/memory/mmu.c	/^init_mmu(){$/;"	f
+init_proc	kernel/main.c	/^init_proc(){$/;"	f
 init_segment	kernel/memory/kvm.c	/^init_segment(void) {$/;"	f
 init_segment_nodes	kernel/memory/heap.c	/^init_segment_nodes(){$/;"	f
 init_serial	kernel/device/serial.c	/^init_serial(void) {$/;"	f
@@ -641,6 +644,7 @@ rcr0	include/x86.h	/^rcr0(void)$/;"	f
 rcr2	include/x86.h	/^rcr2(void)$/;"	f
 rcr3	include/x86.h	/^rcr3(void)$/;"	f
 rcr4	include/x86.h	/^rcr4(void)$/;"	f
+re	kernel/irq/do_irq.S	/^re:	iret$/;"	l
 read_ebp	include/x86.h	/^read_ebp(void)$/;"	f
 read_eflags	include/x86.h	/^read_eflags(void)$/;"	f
 read_esp	include/x86.h	/^read_esp(void)$/;"	f

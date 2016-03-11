@@ -5,12 +5,14 @@
 #include "include/elf.h"
 
 
+
+
 void init_segment_nodes();
 segment_Node * get_free_node(uint32_t);
 uint32_t new_segment(uint32_t,uint32_t,uint32_t ,uint32_t);
 
 
-
+//init the memory manage unit
 void
 init_mmu(){
 	init_segment_nodes();
@@ -22,16 +24,43 @@ init_mmu(){
  * also need to fill PCB
  *
  */
+
+
 uint32_t
-segment_malloc(ProgramHeader *ph, TrapFrame *tf, int32_t *count){
+segment_malloc(ProgramHeader *ph, TrapFrame *tf){
 	/*
 	 * alloc memory and fill in the idt
 	 * */
 	printk("Here work in segment_malloc in %s\n",__FILE__);
+	segment_Node *Node = get_free_node(USER_SIZE);
+	if(Node == NULL)
+		assert(0);
+	uint32_t pa = Node -> start;
+	Node ->start += USER_SIZE;
+	Node ->size -= USER_SIZE;
+	//malloc memory of n * align size
+	if(Node -> size ==0)
+		Node -> active =false;
+	tf->ds=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,USER_SIZE,DPL_USER));
+	tf->cs=SELECTOR_USER(new_segment(SEG_EXE_CODE,pa,USER_SIZE,DPL_USER));
+	tf->ss=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,USER_STACK_SIZE,DPL_USER));//stack segment
+	printk("ds= %d\n",tf->ds);
+	printk("cs= %d\n",tf->cs);
+	printk("ss= %d\n",tf->ss);
+	printk("pa = 0x%x\n",pa);
+	//printk("segdesc = %08x\n",*((uint64_t *)ph));
+	return pa;
+}
+
+
+
+/*uint32_t
+segment_malloc(ProgramHeader *ph, TrapFrame *tf, int32_t *count){
+	printk("Here work in segment_malloc in %s\n",__FILE__);
 	uint32_t memsz = ph->memsz;
 	uint32_t align = ph->align;
 	uint32_t n = (memsz / align) + 1;
-	printk("n= %d in %s\n",__FILE__,n);
+	printk("n= %d in %s\n",n,__FILE__);
 	segment_Node *Node = get_free_node(n * align);
 	if(Node == NULL)
 		assert(0);
@@ -43,9 +72,6 @@ segment_malloc(ProgramHeader *ph, TrapFrame *tf, int32_t *count){
 		Node -> active =false;
 
 
-	/*
-	 * malloc memory and fill in the descriptor
-	 */
 	if(ph->flags==6){
 		tf->ds=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,n * align,DPL_USER));
 	}//data segmemt
@@ -55,10 +81,14 @@ segment_malloc(ProgramHeader *ph, TrapFrame *tf, int32_t *count){
 	else
 		assert(0);
 
-	printk("segdesc = %08x\n",*((uint64_t *)ph));
+	printk("ds= %d\n",tf->ds);
+	printk("cs= %d\n",tf->cs);
+	printk("pa = 0x%x\n",pa);
+	//printk("segdesc = %08x\n",*((uint64_t *)ph));
 	(*count)++;
 	return pa;
 }
+*/
 
 void stack_malloc(TrapFrame *tf, int32_t *count){
 	printk("Here work in stack_malloc in %s\n",__FILE__);
@@ -67,6 +97,8 @@ void stack_malloc(TrapFrame *tf, int32_t *count){
 	Node ->start += USER_STACK_SIZE;
 	Node ->size -= USER_STACK_SIZE;
 	tf->ss=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,USER_STACK_SIZE,DPL_USER));//stack segment
+	printk("ss= %d\n",tf->ss);
+	printk("stack starts at 0x%x\n",pa);
 	(*count)++;
 }//need to fill PCB
 
