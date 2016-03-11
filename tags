@@ -13,28 +13,28 @@ BOOT_S	Makefile	/^BOOT_S := $(wildcard $(BOOT_DIR)\/*.S)$/;"	m
 CC	Makefile	/^CC      := gcc$/;"	m
 CFLAGS	Makefile	/^CFLAGS := -Wall -Werror -Wfatal-errors #开启所有警告, 视警告为错误, 第一个错误结束编译$/;"	m
 CMDBYTE	include/kbdreg.h	204;"	d
-CR0_AM	include/mmu.h	26;"	d
-CR0_CD	include/mmu.h	28;"	d
-CR0_EM	include/mmu.h	21;"	d
-CR0_ET	include/mmu.h	23;"	d
-CR0_MP	include/mmu.h	20;"	d
-CR0_NE	include/mmu.h	24;"	d
-CR0_NW	include/mmu.h	27;"	d
-CR0_PE	include/mmu.h	19;"	d
-CR0_PG	include/mmu.h	29;"	d
-CR0_TS	include/mmu.h	22;"	d
-CR0_WP	include/mmu.h	25;"	d
-CR4_DE	include/mmu.h	34;"	d
-CR4_MCE	include/mmu.h	32;"	d
-CR4_PCE	include/mmu.h	31;"	d
-CR4_PSE	include/mmu.h	33;"	d
-CR4_PVI	include/mmu.h	36;"	d
-CR4_TSD	include/mmu.h	35;"	d
-CR4_VME	include/mmu.h	37;"	d
+CR0_AM	include/mmu.h	28;"	d
+CR0_CD	include/mmu.h	30;"	d
+CR0_EM	include/mmu.h	23;"	d
+CR0_ET	include/mmu.h	25;"	d
+CR0_MP	include/mmu.h	22;"	d
+CR0_NE	include/mmu.h	26;"	d
+CR0_NW	include/mmu.h	29;"	d
+CR0_PE	include/mmu.h	21;"	d
+CR0_PG	include/mmu.h	31;"	d
+CR0_TS	include/mmu.h	24;"	d
+CR0_WP	include/mmu.h	27;"	d
+CR4_DE	include/mmu.h	36;"	d
+CR4_MCE	include/mmu.h	34;"	d
+CR4_PCE	include/mmu.h	33;"	d
+CR4_PSE	include/mmu.h	35;"	d
+CR4_PVI	include/mmu.h	38;"	d
+CR4_TSD	include/mmu.h	37;"	d
+CR4_VME	include/mmu.h	39;"	d
 DD	Makefile	/^DD      := dd$/;"	m
 DEPS	Makefile	/^DEPS := $(shell find -name "*.d")$/;"	m
-DPL_KERNEL	include/mmu.h	70;"	d
-DPL_USER	include/mmu.h	71;"	d
+DPL_KERNEL	include/mmu.h	72;"	d
+DPL_USER	include/mmu.h	73;"	d
 ELFHeader	boot/boot.h	/^struct ELFHeader {$/;"	s
 ELFHeader	include/elf.h	/^struct ELFHeader {$/;"	s
 ELF_MAGIC	kernel/process/process.c	15;"	d	file:
@@ -46,27 +46,27 @@ E_NO_FREE_ENV	lib/printfmt.c	/^	E_NO_FREE_ENV	= 5,	\/\/ Attempt to create a new 
 E_NO_MEM	lib/printfmt.c	/^	E_NO_MEM	= 4,	\/\/ Request failed due to memory shortage$/;"	e	enum:__anon4	file:
 E_NO_SYS	lib/printfmt.c	/^	E_NO_SYS	= 7,	\/\/ Unimplemented system call$/;"	e	enum:__anon4	file:
 E_UNSPECIFIED	lib/printfmt.c	/^	E_UNSPECIFIED	= 1,	\/\/ Unspecified or unknown problem$/;"	e	enum:__anon4	file:
-FL_AC	include/mmu.h	57;"	d
-FL_AF	include/mmu.h	42;"	d
-FL_CF	include/mmu.h	40;"	d
-FL_DF	include/mmu.h	47;"	d
-FL_ID	include/mmu.h	60;"	d
-FL_IF	include/mmu.h	46;"	d
-FL_IOPL_0	include/mmu.h	50;"	d
-FL_IOPL_1	include/mmu.h	51;"	d
-FL_IOPL_2	include/mmu.h	52;"	d
-FL_IOPL_3	include/mmu.h	53;"	d
-FL_IOPL_MASK	include/mmu.h	49;"	d
-FL_NT	include/mmu.h	54;"	d
-FL_OF	include/mmu.h	48;"	d
-FL_PF	include/mmu.h	41;"	d
-FL_RF	include/mmu.h	55;"	d
-FL_SF	include/mmu.h	44;"	d
-FL_TF	include/mmu.h	45;"	d
-FL_VIF	include/mmu.h	58;"	d
-FL_VIP	include/mmu.h	59;"	d
-FL_VM	include/mmu.h	56;"	d
-FL_ZF	include/mmu.h	43;"	d
+FL_AC	include/mmu.h	59;"	d
+FL_AF	include/mmu.h	44;"	d
+FL_CF	include/mmu.h	42;"	d
+FL_DF	include/mmu.h	49;"	d
+FL_ID	include/mmu.h	62;"	d
+FL_IF	include/mmu.h	48;"	d
+FL_IOPL_0	include/mmu.h	52;"	d
+FL_IOPL_1	include/mmu.h	53;"	d
+FL_IOPL_2	include/mmu.h	54;"	d
+FL_IOPL_3	include/mmu.h	55;"	d
+FL_IOPL_MASK	include/mmu.h	51;"	d
+FL_NT	include/mmu.h	56;"	d
+FL_OF	include/mmu.h	50;"	d
+FL_PF	include/mmu.h	43;"	d
+FL_RF	include/mmu.h	57;"	d
+FL_SF	include/mmu.h	46;"	d
+FL_TF	include/mmu.h	47;"	d
+FL_VIF	include/mmu.h	60;"	d
+FL_VIP	include/mmu.h	61;"	d
+FL_VM	include/mmu.h	58;"	d
+FL_ZF	include/mmu.h	45;"	d
 FREQ_8253	kernel/device/timer.c	8;"	d	file:
 GDB	Makefile	/^GDB     := gdb$/;"	m
 GDB_OPTIONS	Makefile	/^GDB_OPTIONS := -ex "target remote 127.0.0.1:1234"$/;"	m
@@ -75,7 +75,8 @@ GateDescriptor	include/mmu.h	/^struct GateDescriptor {$/;"	s
 HZ	kernel/device/timer.c	9;"	d	file:
 IMAGE	Makefile	/^IMAGE  := disk.bin$/;"	m
 INTERRUPT_GATE_32	kernel/irq/idt.c	3;"	d	file:
-IRQ_SLAVE	kernel/irq/i8259.c	6;"	d	file:
+IRQ_OFFSET	kernel/irq/i8259.c	6;"	d	file:
+IRQ_SLAVE	kernel/irq/i8259.c	7;"	d	file:
 JOS_INC_ASSERT_H	include/assert.h	4;"	d
 JOS_INC_MMU_H	include/mmu.h	2;"	d
 JOS_INC_STDARG_H	include/stdarg.h	3;"	d
@@ -236,7 +237,7 @@ MAXERROR	lib/printfmt.c	/^	MAXERROR$/;"	e	enum:__anon4	file:
 MAXMEM	include/mmu.h	10;"	d
 MIN	include/types.h	43;"	d
 NR_IRQ	include/x86.h	7;"	d
-NR_SEGMENTS	include/mmu.h	81;"	d
+NR_SEGMENTS	include/mmu.h	83;"	d
 NR_SEG_NODES	kernel/memory/heap.c	5;"	d	file:
 NSYSCALLS	kernel/irq/syscall.c	/^	NSYSCALLS$/;"	e	enum:__anon3	file:
 NSYSCALLS	user/lib.h	/^	NSYSCALLS$/;"	e	enum:__anon5
@@ -342,46 +343,47 @@ SECTORS_SIZE	kernel/process/process.c	13;"	d	file:
 SECTSIZE	boot/main.c	11;"	d	file:
 SECTSIZE	kernel/process/disk_read.c	3;"	d	file:
 SEG	include/mmu.h	/^SEG(SegDesc *ptr, uint32_t type,uint32_t base, uint32_t limit, uint32_t dpl){$/;"	f
-SEG	include/mmu.h	103;"	d
+SEG	include/mmu.h	107;"	d
 SEG16	include/mmu.h	/^SEG16(SegDesc *ptr, uint32_t type,uint32_t base, uint32_t limit, uint32_t dpl){$/;"	f
 SEG_ASM	boot/asm.h	9;"	d
-SEG_EXECUTABLE	include/mmu.h	76;"	d
-SEG_EXE_CODE	include/mmu.h	78;"	d
-SEG_FAULT	include/mmu.h	151;"	d
-SEG_KERNEL_CODE	include/mmu.h	82;"	d
-SEG_KERNEL_DATA	include/mmu.h	83;"	d
-SEG_NULL	include/mmu.h	100;"	d
-SEG_NULL	include/mmu.h	149;"	d
+SEG_EXECUTABLE	include/mmu.h	78;"	d
+SEG_EXE_CODE	include/mmu.h	80;"	d
+SEG_FAULT	include/mmu.h	155;"	d
+SEG_KERNEL_CODE	include/mmu.h	84;"	d
+SEG_KERNEL_DATA	include/mmu.h	85;"	d
+SEG_NULL	include/mmu.h	104;"	d
+SEG_NULL	include/mmu.h	153;"	d
 SEG_NULLASM	boot/asm.h	5;"	d
-SEG_READABLE	include/mmu.h	75;"	d
-SEG_RW_DATA	include/mmu.h	77;"	d
-SEG_TSS	include/mmu.h	86;"	d
-SEG_WRITABLE	include/mmu.h	74;"	d
-SELECTOR_KERNEL	include/mmu.h	90;"	d
-SELECTOR_USER	include/mmu.h	91;"	d
-SEL_KEL	include/mmu.h	108;"	d
+SEG_READABLE	include/mmu.h	77;"	d
+SEG_RW_DATA	include/mmu.h	79;"	d
+SEG_TSS	include/mmu.h	88;"	d
+SEG_WRITABLE	include/mmu.h	76;"	d
+SELECTOR_INDEX	include/mmu.h	95;"	d
+SELECTOR_KERNEL	include/mmu.h	92;"	d
+SELECTOR_USER	include/mmu.h	93;"	d
+SEL_KEL	include/mmu.h	112;"	d
 SERIAL_PORT	kernel/device/serial.c	3;"	d	file:
-SETCALLGATE	include/mmu.h	350;"	d
-SETGATE	include/mmu.h	336;"	d
+SETCALLGATE	include/mmu.h	354;"	d
+SETGATE	include/mmu.h	340;"	d
 SLOW	kernel/device/video.c	10;"	d	file:
-STA_A	include/mmu.h	206;"	d
-STA_C	include/mmu.h	203;"	d
-STA_E	include/mmu.h	202;"	d
-STA_R	include/mmu.h	205;"	d
-STA_W	include/mmu.h	204;"	d
-STA_X	include/mmu.h	201;"	d
-STS_CG16	include/mmu.h	212;"	d
-STS_CG32	include/mmu.h	218;"	d
-STS_IG16	include/mmu.h	214;"	d
-STS_IG32	include/mmu.h	219;"	d
-STS_LDT	include/mmu.h	210;"	d
-STS_T16A	include/mmu.h	209;"	d
-STS_T16B	include/mmu.h	211;"	d
-STS_T32A	include/mmu.h	216;"	d
-STS_T32B	include/mmu.h	217;"	d
-STS_TG	include/mmu.h	213;"	d
-STS_TG16	include/mmu.h	215;"	d
-STS_TG32	include/mmu.h	220;"	d
+STA_A	include/mmu.h	210;"	d
+STA_C	include/mmu.h	207;"	d
+STA_E	include/mmu.h	206;"	d
+STA_R	include/mmu.h	209;"	d
+STA_W	include/mmu.h	208;"	d
+STA_X	include/mmu.h	205;"	d
+STS_CG16	include/mmu.h	216;"	d
+STS_CG32	include/mmu.h	222;"	d
+STS_IG16	include/mmu.h	218;"	d
+STS_IG32	include/mmu.h	223;"	d
+STS_LDT	include/mmu.h	214;"	d
+STS_T16A	include/mmu.h	213;"	d
+STS_T16B	include/mmu.h	215;"	d
+STS_T32A	include/mmu.h	220;"	d
+STS_T32B	include/mmu.h	221;"	d
+STS_TG	include/mmu.h	217;"	d
+STS_TG16	include/mmu.h	219;"	d
+STS_TG32	include/mmu.h	224;"	d
 SYS_cgetc	kernel/irq/syscall.c	/^	SYS_cgetc,$/;"	e	enum:__anon3	file:
 SYS_cgetc	user/lib.h	/^	SYS_cgetc,$/;"	e	enum:__anon5
 SYS_cputs	kernel/irq/syscall.c	/^	SYS_cputs = 0,$/;"	e	enum:__anon3	file:
@@ -430,7 +432,9 @@ USER_LD_SCRIPT	Makefile	/^USER_LD_SCRIPT :=$(shell find $(USER_DIR) -name "*.ld"
 USER_O	Makefile	/^USER_O := $(USER_C:%.c=$(OBJ_DIR)\/%.o)$/;"	m
 USER_OFFSET	kernel/process/process.c	19;"	d	file:
 USER_S	Makefile	/^USER_S := $(shell find $(USER_DIR) -name "*.S")$/;"	m
-USER_STACK_SIZE	include/mmu.h	12;"	d
+USER_SIZE	include/mmu.h	12;"	d
+USER_STACK_SIZE	include/mmu.h	14;"	d
+USER_STACK_TOP	include/mmu.h	13;"	d
 USTACKTOP	kernel/process/process.c	14;"	d	file:
 UTrapFrame_init	kernel/process/process.c	/^void UTrapFrame_init(TrapFrame *tf)$/;"	f
 VMEM_ADDR	include/video.h	10;"	d
@@ -516,6 +520,7 @@ gdt	boot/start.S	/^gdt:$/;"	l
 gdt	kernel/memory/kvm.c	/^static SegDesc gdt[NR_SEGMENTS];$/;"	v	file:
 gdtdesc	boot/start.S	/^gdtdesc:                           # GDT描述符$/;"	l
 get_free_node	kernel/memory/heap.c	/^get_free_node(uint32_t needSize){$/;"	f
+get_string_from_user	kernel/memory/mmu.c	/^get_string_from_user(TrapFrame *tf, uint32_t ptr){$/;"	f
 getint	lib/printfmt.c	/^getint(va_list *ap, int lflag)$/;"	f	file:
 getuint	lib/printfmt.c	/^getuint(va_list *ap, int lflag)$/;"	f	file:
 granularity	include/mmu.h	/^	uint32_t granularity         : 1;$/;"	m	struct:SegmentDescriptor
@@ -658,7 +663,7 @@ segment	include/mmu.h	/^	uint32_t segment          : 16;\/\/segment selector$/;"
 segment_Node	include/segNode.h	/^struct segment_Node{$/;"	s
 segment_Node	include/segNode.h	/^typedef struct segment_Node segment_Node;$/;"	t	typeref:struct:segment_Node
 segment_buffer	kernel/memory/heap.c	/^segment_Node segment_buffer[NR_SEG_NODES];$/;"	v
-segment_malloc	kernel/memory/mmu.c	/^segment_malloc(ProgramHeader *ph, TrapFrame *tf, int32_t *count){$/;"	f
+segment_malloc	kernel/memory/mmu.c	/^segment_malloc(ProgramHeader *ph, TrapFrame *tf){$/;"	f
 segment_type	include/mmu.h	/^	uint32_t segment_type        : 1;$/;"	m	struct:SegmentDescriptor
 serial_idle	kernel/device/serial.c	/^serial_idle(void) {$/;"	f	file:
 serial_printc	kernel/device/serial.c	/^serial_printc(char ch) {$/;"	f
@@ -669,6 +674,7 @@ set_timer_intr_handler	kernel/irq/irq_handle.c	/^set_timer_intr_handler( void (*
 set_trap	kernel/irq/idt.c	/^set_trap(struct GateDescriptor *ptr, uint32_t selector, uint32_t offset, uint32_t dpl) {$/;"	f	file:
 set_tss	kernel/memory/kvm.c	/^set_tss(SegDesc *ptr) {$/;"	f	file:
 set_tss_esp0	kernel/memory/kvm.c	/^void set_tss_esp0(uint32_t esp) {$/;"	f
+set_tss_ss0	kernel/memory/kvm.c	/^void set_tss_ss0(uint32_t ss){$/;"	f
 shentsize	boot/boot.h	/^	unsigned short shentsize;$/;"	m	struct:ELFHeader
 shentsize	include/elf.h	/^	unsigned short shentsize;$/;"	m	struct:ELFHeader
 shnum	boot/boot.h	/^	unsigned short shnum;$/;"	m	struct:ELFHeader
@@ -707,7 +713,7 @@ strtol	lib/string.c	/^strtol(const char *s, char **endptr, int base)$/;"	f
 sys_cputs	kernel/irq/syscall.c	/^static void sys_cputs(const char *s,size_t len)$/;"	f	file:
 sys_cputs	user/syscall.c	/^int sys_cputs(const char *s,uint32_t len)$/;"	f
 syscall	kernel/irq/syscall.c	/^int syscall(uint32_t syscallno,uint32_t a1,uint32_t a2,\\$/;"	f
-syscall	user/syscall.c	/^static inline int32_t syscall(int num, int check, uint32_t a1,uint32_t a2,uint32_t a3, uint32_t a4, uint32_t a5)$/;"	f	file:
+syscall	user/syscall.c	/^syscall(int num, int check, uint32_t a1,uint32_t a2,uint32_t a3, uint32_t a4, uint32_t a5)$/;"	f	file:
 system	include/mmu.h	/^	uint32_t system           : 1;\/\/must be 0(system)$/;"	m	struct:GateDescriptor
 tf	include/process.h	/^	void *tf;$/;"	m	struct:PCB
 tlbflush	include/x86.h	/^tlbflush(void)$/;"	f

@@ -59,16 +59,16 @@ static SegDesc gdt[NR_SEGMENTS];
 
 static void
 set_segment(SegDesc *ptr, uint32_t pl, uint32_t type) {
-	ptr->limit_15_0  = (KERNEL_SIZE >> 12)&0xffff;
-	//ptr->limit_15_0  = 0xFFFF;
+	//ptr->limit_15_0  = (KERNEL_SIZE >> 12)&0xffff;
+	ptr->limit_15_0  = 0xFFFF;
 	ptr->base_15_0   = 0x0;
 	ptr->base_23_16  = 0x0;
 	ptr->type = type;
 	ptr->segment_type = 1;
 	ptr->privilege_level = pl;
 	ptr->present = 1;
-	//ptr->limit_19_16 = 0xF;
-	ptr->limit_19_16 = (KERNEL_SIZE >> 28) & 0xf;
+	ptr->limit_19_16 = 0xF;
+	//ptr->limit_19_16 = (KERNEL_SIZE >> 28) & 0xf;
 	ptr->soft_use = 0;
 	ptr->operation_size = 0;
 	ptr->pad0 = 1;
@@ -94,6 +94,9 @@ new_segment(uint32_t type, uint32_t base, uint32_t limit, uint32_t dpl){
 	printk("No SegDesc available!\n");
 	assert(0);
 }
+
+
+
 
 
 void

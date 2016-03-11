@@ -11,6 +11,7 @@
 
 static void (*do_timer)(void);
 static void (*do_keyboard)(int);
+uint32_t get_string_from_user(TrapFrame *tf, uint32_t ptr);
 
 void
 set_timer_intr_handler( void (*ptr)(void) ) {
@@ -34,7 +35,9 @@ irq_handle(struct TrapFrame *tf) {
 			printk("%s, %d: Unhandled exception!\n", __FUNCTION__, __LINE__);
 		}
 		else if(tf->irq == 0x80){
-			tf->eax = syscall(tf->eax,tf->ebx,tf->ecx,tf->edx,tf->esi,tf->edi);
+			printk("0x80!\n");
+			tf->eax = syscall(tf->eax,tf->ebx,get_string_from_user(tf,tf->ecx),tf->edx,tf->esi,tf->edi);
+			print_stack(tf);
 			return;
 		}
 		else {
@@ -46,7 +49,8 @@ irq_handle(struct TrapFrame *tf) {
 	else if (tf->irq == 1000) {
 		printk("timer\n");
 		do_timer();
-		//print_stack(tf);
+		print_stack(tf);
+		printk("==========\n");
 	}
 	else if (tf->irq == 1001) {
 		uint32_t code = inb(0x60);

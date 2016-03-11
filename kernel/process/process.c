@@ -41,8 +41,8 @@ void print_stack(TrapFrame *tf)
 
 //	printk("gs = %d\n",tf->gs);
 //	printk("fs = %d\n",tf->fs);
-	printk("es = %x\n",tf->es);
-	printk("ds = %x\n",tf->ds);
+	printk("es = 0x%x\n",tf->es);
+	printk("ds = 0x%x\n",tf->ds);
 	printk("irq = %d\n",tf->irq);
 	printk("err = %x\n",tf->err);
 	printk("eip = 0x%x\n",tf->eip);
@@ -51,7 +51,7 @@ void print_stack(TrapFrame *tf)
 	printk("cs = 0x%x\n",tf->cs);
 	printk("eflags = 0x%x\n",tf->eflags);
 	printk("esp = 0x%x\n",tf->esp);
-	printk("ss = %d\n",tf->ss);
+	printk("ss = 0x%x\n",tf->ss);
 }
 
 
@@ -60,8 +60,6 @@ void UTrapFrame_init(TrapFrame *tf)
 	
 	tf -> es = tf -> ds; 
 	tf -> eflags = 0x00000202;
-	tf->esp= USTACKTOP;
-
 }
 
 //PCBPool init

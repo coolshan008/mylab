@@ -63,15 +63,16 @@ Disassembly of section .text:
   8f:	e8 a6 ff ff ff       	call   3a <sys_cputs>
   94:	c9                   	leave  
   95:	c3                   	ret    
-	...
+  96:	90                   	nop
+  97:	90                   	nop
 
 00000098 <main>:
   98:	55                   	push   %ebp
   99:	89 e5                	mov    %esp,%ebp
   9b:	83 e4 f0             	and    $0xfffffff0,%esp
   9e:	83 ec 10             	sub    $0x10,%esp
-  a1:	c7 44 24 04 19 00 00 	movl   $0x19,0x4(%esp)
+  a1:	c7 44 24 04 05 00 00 	movl   $0x5,0x4(%esp)
   a8:	00 
   a9:	c7 04 24 b7 00 00 00 	movl   $0xb7,(%esp)
   b0:	e8 c7 ff ff ff       	call   7c <cputs>
-  b5:	eb fe                	jmp    b5 <main+0x1d>
+  b5:	eb ea                	jmp    a1 <main+0x9>

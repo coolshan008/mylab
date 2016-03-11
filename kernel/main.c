@@ -23,10 +23,10 @@ init_proc(){
 int main(){
 	printk("start kernel!!!!!!!!!\n");
 	init_segment();
-	init_serial();
-	init_timer();
 	init_idt();
 	init_intr();
+	init_serial();
+	init_timer();
 	init_keyboard();
 	init_proc();
 	blue_screen();

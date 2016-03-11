@@ -92,6 +92,8 @@
 #define SELECTOR_KERNEL(s)		( (s << 3) | DPL_KERNEL )
 #define SELECTOR_USER(s)		( (s << 3) | DPL_USER )
 
+#define SELECTOR_INDEX(s)		((s >> 3) - 4)
+
 
 
 #ifdef __ASSEMBLER__
@@ -165,7 +167,7 @@ static inline void
 SEG(SegDesc *ptr, uint32_t type,uint32_t base, uint32_t limit, uint32_t dpl){
 	ptr->limit_15_0  = (limit >> 12 ) & 0xFFFF;
 	ptr->base_15_0   = base & 0xffff;
-	ptr->base_23_16  = (base >> 16) & 0xff;
+	ptr->base_23_16  = (base >> 28) & 0xff;
 	ptr->type = type;
 	ptr->segment_type = 1;
 	ptr->privilege_level = dpl;

@@ -2,6 +2,8 @@
 #include "include/x86.h"
 #include "include/string.h"
 #include "include/process.h"
+#include "include/stdio.h"
+
 
 enum
 {
@@ -22,9 +24,12 @@ enum
 	NSYSCALLS
 };
 
+void serial_printc(char ch);
+
 static void sys_cputs(const char *s,size_t len)
 {
-	printk(s);
+	for(int i=0;i<len;i++)
+		serial_printc(s[i]);
 }
 
 

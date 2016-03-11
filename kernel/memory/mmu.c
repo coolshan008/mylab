@@ -20,10 +20,16 @@ init_mmu(){
 
 
 
-/*
- * also need to fill PCB
- *
- */
+uint32_t
+get_string_from_user(TrapFrame *tf, uint32_t ptr){
+	printk("In get_string_from_user \n");
+	printk("ptr= 0x%x\n",ptr);
+	uint32_t pa=KERNEL_SIZE + SELECTOR_INDEX(tf->ds) * USER_SIZE + ptr;
+	printk("pa=0x%x\n",pa);
+	return pa;
+}
+//return the pa of the ptr
+
 
 
 uint32_t
@@ -43,7 +49,15 @@ segment_malloc(ProgramHeader *ph, TrapFrame *tf){
 		Node -> active =false;
 	tf->ds=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,USER_SIZE,DPL_USER));
 	tf->cs=SELECTOR_USER(new_segment(SEG_EXE_CODE,pa,USER_SIZE,DPL_USER));
-	tf->ss=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,USER_STACK_SIZE,DPL_USER));//stack segment
+	//tf->ss=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,USER_STACK_SIZE,DPL_USER));//stack segment
+	//tf->cs=tf->ds;
+	tf->ss=tf->ds;
+	/*
+	 * Here, ds,cs,ss share the same memory
+	 * it equals to the case where ds=cs=ss
+	 */
+	//tf->cs= tf->ds;
+	//tf->ss=tf->ds;
 	printk("ds= %d\n",tf->ds);
 	printk("cs= %d\n",tf->cs);
 	printk("ss= %d\n",tf->ss);
