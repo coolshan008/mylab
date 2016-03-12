@@ -48,7 +48,7 @@ asm_do_irq:
 	popl %fs
 	popl %es
 	popl %ds
-	addl $8, %esp
+	addl $4, %esp
 
 	iret
 
