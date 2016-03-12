@@ -50,7 +50,7 @@ asm_do_irq:
 	popl %fs
 	popl %es
 	popl %ds
-	addl $4, %esp
+	addl $8, %esp
 
 re:	iret
 

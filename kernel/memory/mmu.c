@@ -47,6 +47,7 @@ segment_malloc(ProgramHeader *ph, TrapFrame *tf){
 	//malloc memory of n * align size
 	if(Node -> size ==0)
 		Node -> active =false;
+	printk("pa = %x\n",pa);
 	tf->ds=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,USER_SIZE,DPL_USER));
 	tf->cs=SELECTOR_USER(new_segment(SEG_EXE_CODE,pa,USER_SIZE,DPL_USER));
 	//tf->ss=SELECTOR_USER(new_segment(SEG_RW_DATA,pa,USER_STACK_SIZE,DPL_USER));//stack segment
