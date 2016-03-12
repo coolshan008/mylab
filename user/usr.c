@@ -6,5 +6,6 @@ int main(void)
 {
 	while(1)
 	cputs(str,5);
+	while(1);
 	return 0;
 }

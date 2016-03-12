@@ -60,6 +60,10 @@ void UTrapFrame_init(TrapFrame *tf)
 	
 	tf -> es = tf -> ds; 
 	tf -> eflags = 0x00000202;
+	tf -> eax=0x1;
+	tf->ebx=0x2;
+	tf->ecx=0x3;
+	tf->edx=0x4;
 }
 
 //PCBPool init
@@ -199,6 +203,9 @@ static void process_load(PCB *pcb)
 		}
 		ph++;
 	}
+	/*for(int a=0;a<0xbf;a++){
+		printk("%x:0x%x\n",a,*(uint8_t *)(a+pa));
+	}*/
 	((TrapFrame *)(pcb->tf))->esp= USER_STACK_TOP;//stack top
 	((TrapFrame *)(pcb->tf))->eip=elf->entry;//eip initial
 	printk("eip = 0x%x  in %s\n",elf->entry,__FUNCTION__);

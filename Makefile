@@ -8,6 +8,7 @@ LD      := ld
 OBJCOPY := objcopy
 DD      := dd
 QEMU    := qemu-system-i386
+#QEMU	:= qemu
 GDB     := gdb
 
 CFLAGS := -Wall -Werror -Wfatal-errors #开启所有警告, 视警告为错误, 第一个错误结束编译
@@ -88,8 +89,8 @@ $(KERNEL): $(KERNEL_O) $(LIB_O)
 	perl genkernel.pl $@
 
 $(USER): $(USER_O) 
-	$(LD) -e main -Ttext=0x0 -m elf_i386 -nostdlib -o $@ $^
-	#$(LD) -m elf_i386 -T $(USER_LD_SCRIPT) -nostdlib -o $@ $^ 
+	#$(LD) -e main -Ttext=0x0 -m elf_i386 -nostdlib -o $@ $^
+	$(LD) -m elf_i386 -T $(USER_LD_SCRIPT) -nostdlib -o $@ $^ 
 	#@rm $@.out
 	#perl user/genuser.pl $@
 

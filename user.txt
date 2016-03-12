@@ -63,8 +63,7 @@ Disassembly of section .text:
   8f:	e8 a6 ff ff ff       	call   3a <sys_cputs>
   94:	c9                   	leave  
   95:	c3                   	ret    
-  96:	90                   	nop
-  97:	90                   	nop
+	...
 
 00000098 <main>:
   98:	55                   	push   %ebp
@@ -73,6 +72,14 @@ Disassembly of section .text:
   9e:	83 ec 10             	sub    $0x10,%esp
   a1:	c7 44 24 04 05 00 00 	movl   $0x5,0x4(%esp)
   a8:	00 
-  a9:	c7 04 24 b7 00 00 00 	movl   $0xb7,(%esp)
+  a9:	c7 04 24 00 10 00 00 	movl   $0x1000,(%esp)
   b0:	e8 c7 ff ff ff       	call   7c <cputs>
   b5:	eb ea                	jmp    a1 <main+0x9>
+	...
+
+000000b8 <start>:
+  b8:	b8 01 00 00 00       	mov    $0x1,%eax
+  bd:	bb 02 00 00 00       	mov    $0x2,%ebx
+  c2:	b9 03 00 00 00       	mov    $0x3,%ecx
+  c7:	ba 04 00 00 00       	mov    $0x4,%edx
+  cc:	e8 c7 ff ff ff       	call   98 <main>

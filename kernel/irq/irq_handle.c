@@ -32,6 +32,7 @@ irq_handle(struct TrapFrame *tf) {
 	//print_stack(tf);
 	if(tf->irq < 1000) {
 		if(tf->irq == -1) {
+			print_stack(tf);
 			printk("%s, %d: Unhandled exception!\n", __FUNCTION__, __LINE__);
 		}
 		else if(tf->irq == 0x80){
