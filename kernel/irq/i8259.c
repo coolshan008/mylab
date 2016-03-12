@@ -16,12 +16,12 @@ init_intr(void) {
 	outb(PORT_PIC_MASTER, 0x11);
 	outb(PORT_PIC_MASTER + 1, 32);
 	outb(PORT_PIC_MASTER + 1, 1 << 2);
-	outb(PORT_PIC_MASTER + 1, 0x3);
+	outb(PORT_PIC_MASTER + 1, 0x1);
 	//outb(PORT_PIC_MASTER + 1, 0x2);
 	outb(PORT_PIC_SLAVE, 0x11);
 	outb(PORT_PIC_SLAVE + 1, 32 + 8);
 	outb(PORT_PIC_SLAVE + 1, 2);
-	outb(PORT_PIC_SLAVE + 1, 0x3);
+	outb(PORT_PIC_SLAVE + 1, 0x1);
 	//outb(PORT_PIC_SLAVE + 1, 0x1);
 
 	outb(PORT_PIC_MASTER, 0x68);

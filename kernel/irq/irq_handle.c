@@ -36,9 +36,9 @@ irq_handle(struct TrapFrame *tf) {
 			printk("%s, %d: Unhandled exception!\n", __FUNCTION__, __LINE__);
 		}
 		else if(tf->irq == 0x80){
-			printk("0x80!\n");
+			//printk("0x80!\n");
 			tf->eax = syscall(tf->eax,tf->ebx,get_string_from_user(tf,tf->ecx),tf->edx,tf->esi,tf->edi);
-			print_stack(tf);
+			//print_stack(tf);
 			return;
 		}
 		else {
@@ -48,10 +48,10 @@ irq_handle(struct TrapFrame *tf) {
 	}
 
 	else if (tf->irq == 1000) {
-		printk("timer\n");
+		//printk("timer\n");
 		do_timer();
-		print_stack(tf);
-		printk("==========\n");
+		//print_stack(tf);
+		//printk("==========\n");
 	}
 	else if (tf->irq == 1001) {
 		uint32_t code = inb(0x60);
